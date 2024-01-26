@@ -3,7 +3,7 @@ import "./Dialog.scss";
 import Button from "./Button";
 import Heading from "./Heading";
 
-const Dialog = ({ openModal, closeModal, children, title }) => {
+const Dialog = ({ openModal, closeModal, children, title, className = "" }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -15,8 +15,8 @@ const Dialog = ({ openModal, closeModal, children, title }) => {
   }, [openModal]);
 
   return (
-    <dialog ref={ref} onCancel={closeModal} className="dialog">
-      <Heading tag={"h2"} text={title} />
+    <dialog ref={ref} onCancel={closeModal} className={"dialog " + className}>
+      {title && <Heading tag={"h2"} text={title} />}
       {children}
       <Button onClick={closeModal} className={"btn-close"} />
     </dialog>

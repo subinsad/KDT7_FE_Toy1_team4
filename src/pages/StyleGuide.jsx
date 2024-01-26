@@ -11,12 +11,15 @@ import Button from "../components/Button";
 import Badge from "../components/Badge";
 import Input from "../components/Form/Input";
 import Select from "../components/Form/Select";
-import { testOption } from "../data/selectOption";
+import { testOption, tel } from "../data/selectOption";
 import Textarea from "../components/Form/Textarea";
 import Checkbox from "../components/Form/Checkbox";
+import PersonInfoList from "../components/PersonInfoList";
+import TimeBlock from "../components/TimeBlock";
 
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);
+  const [alertModal, setAlertModal] = useState(false);
 
   const nullOption = () => {
     return "";
@@ -73,21 +76,37 @@ const StyleGuide = () => {
           setModal(true);
         }}
       />
+      <Button
+        className={"btn regular primary"}
+        text="경고창"
+        onClick={() => {
+          setAlertModal(true);
+        }}
+      />
       <Dialog openModal={modal} closeModal={() => setModal(false)} title={"popuptitle"}>
         팝업내용
+      </Dialog>
+
+      <Dialog openModal={alertModal} closeModal={() => setAlertModal(false)} className={"alert"}>
+        경고창
       </Dialog>
 
       <hr />
 
       <Input width={"20rem"} />
       <br />
-      <Select placeholder={"선택하세요"} options={testOption} onChangeOption={nullOption} />
+      <Select placeholder={"선택하세요"} options={tel} onChangeOption={nullOption} />
       <br />
       <Textarea width={"100%"} height={"10rem"} />
       <br />
       {/* 체크박스 라디오버튼 디자인필요 */}
-      {/* https://react.pixelstrap.com/cuba-context/app/ecommerce/checkout/Dubai */}
+      {/* https://react.pixelstrap.com/cuba-context/app/ecommerce/product/Rome#javascript */}
       <Checkbox type={"type1"} id={"chk1_1"} text="선택하세요" />
+
+      <hr />
+
+      <PersonInfoList />
+      <TimeBlock time={"11:00:20"} title={"현재시각"} />
     </div>
   );
 };
