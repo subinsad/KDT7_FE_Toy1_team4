@@ -1,0 +1,12 @@
+@import "../scss/base.scss";
+@import "../components/Block.scss";
+
+.dialog {
+  @include position(f, left, 50%, top, 50%, 100);
+  @extend .block;
+  min-width: 30rem;
+  min-height: 10rem;
+  &::backdrop {
+    background-color: rgba($black, 0.5);
+  }
+}

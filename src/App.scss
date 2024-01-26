@@ -1,0 +1,16 @@
+@import "./scss/base.scss";
+body {
+  height: 100vh;
+  background: radial-gradient(rgba($primary, 0.9), rgba($primary, 0.2));
+}
+.containers {
+  @include position(f, left, 50%, top, 50%);
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  border-radius: 3rem;
+  overflow: hidden;
+  width: 85vw;
+  height: 80vh;
+  background-color: $white;
+  font-size: 1.6rem;
+}
