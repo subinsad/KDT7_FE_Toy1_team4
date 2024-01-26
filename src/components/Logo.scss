@@ -1,0 +1,7 @@
+@import "../scss/base.scss";
+.logo {
+  display: inline-flex;
+  padding: 1rem;
+  border-radius: 100%;
+  background: rgba($primary, 0.2);
+}
