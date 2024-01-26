@@ -20,21 +20,21 @@ $BadgeSize: (
 $BadgeColor: (
   1: (
     "class": "primary",
-    "borderColor": #7366ff,
-    "bgColor": #7366ff,
-    "color": #7366ff,
+    "borderColor": $primary,
+    "bgColor": $primary,
+    "color": $primary,
   ),
   2: (
     "class": "danger",
-    "borderColor": #fc4438,
-    "bgColor": #fc4438,
-    "color": #fc4438,
+    "borderColor": $danger,
+    "bgColor": $danger,
+    "color": $danger,
   ),
   3: (
     "class": "success",
-    "borderColor": #54ba4a,
-    "bgColor": #54ba4a,
-    "color": #54ba4a,
+    "borderColor": $success,
+    "bgColor": $success,
+    "color": $success,
   ),
 );
 
