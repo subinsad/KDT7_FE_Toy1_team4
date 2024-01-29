@@ -34,6 +34,7 @@ const StyleGuide = () => {
       <hr />
 
       <Text type={"type1"} text={"type1"} />
+      <Text type={"type2"} text={"type2"} />
 
       <hr />
 

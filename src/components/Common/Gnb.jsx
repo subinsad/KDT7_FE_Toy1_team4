@@ -30,11 +30,6 @@ const Gnb = () => {
             <span>스타일가이드</span>
           </Link>
         </li>
-        <li className="ico5">
-          <Link to="/login">
-            <span>로그인</span>
-          </Link>
-        </li>
       </ul>
     </nav>
   );
