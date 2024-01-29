@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import Join from "../pages/Join";
 import Layout from "../layout/Layout";
 import ProtectedRoute from "./ProtectedRoute";
+import MainContent from "../pages/MainContent";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
+      {
+        path: "main",
+        element: <MainContent />,
+      },
       {
         path: "notice",
         element: <Notice />,

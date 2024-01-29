@@ -38,7 +38,7 @@ const Login = () => {
       setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
 
-      navigate("/");
+      navigate("/main");
     } catch (error) {
       if (error instanceof FirebaseError) {
         setError(error.message);
