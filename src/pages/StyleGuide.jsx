@@ -108,7 +108,10 @@ const StyleGuide = () => {
       <hr />
 
       <PersonInfoList />
-      <TimeBlock time={"11:00:20"} title={"현재시각"} />
+      <TimeBlock time={"11:00:20"} title={"현재시각"} icon={"ico1"} />
+      <TimeBlock time={"11:00:20"} title={"근무종료"} icon={"ico2"} />
+      <TimeBlock time={"11:00:20"} title={"근무시각"} icon={"ico3"} />
+      <TimeBlock time={"11:00:20"} title={"현재시각"} icon={"ico4"} />
     </div>
   );
 };
