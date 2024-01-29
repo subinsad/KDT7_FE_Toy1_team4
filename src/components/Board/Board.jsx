@@ -2,8 +2,8 @@ import React from "react";
 import "./Board.scss";
 import BoardCard from "./BoardCard";
 import BoardList from "./BoardList";
-import Heading from "../Heading";
-import Block from "../Block";
+import Heading from "../Common/Heading";
+import Block from "../Common/Block";
 
 const Board = ({ type, headingTag, headingText }) => {
   const BoardTypes = (type) => {

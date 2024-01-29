@@ -1,7 +1,7 @@
 import React from "react";
-import Profile from "../Profile";
+import Profile from "../Common/Profile";
 import pic1 from "../../assets/profile1.jpg";
-import Button from "../Button";
+import Button from "../Common/Button";
 
 const BoardList = ({ types }) => {
   return (

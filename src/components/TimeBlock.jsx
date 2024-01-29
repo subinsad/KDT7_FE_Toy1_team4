@@ -1,6 +1,6 @@
 import React from "react";
-import Block from "./Block";
-import Heading from "./Heading";
+import Block from "./Common/Block";
+import Heading from "./Common/Heading";
 import "./TimeBlock.scss";
 
 const TimeBlock = ({ title, time }) => {

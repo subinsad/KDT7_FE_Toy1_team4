@@ -1,12 +1,12 @@
 import React from "react";
-import Profile from "./Profile";
+import Profile from "./Common/Profile";
 import pic1 from "../assets/profile2.jpg";
-import Heading from "./Heading";
-import Block from "./Block";
+import Heading from "./Common/Heading";
+import Block from "./Common/Block";
 import "./BusinessCard.scss";
-import Text from "./Text";
-import MyStatus from "./MyStatus";
-import Button from "./Button";
+import Text from "./Common/Text";
+import MyStatus from "./Common/MyStatus";
+import Button from "./Common/Button";
 
 const BusinessCard = () => {
   return (

@@ -1,1 +1,7 @@
 @import "../scss/base.scss";
+
+.main-top {
+  display: grid;
+  grid-template-columns: 1fr 30rem;
+  gap: 5rem;
+}

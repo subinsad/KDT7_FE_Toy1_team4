@@ -1,5 +1,5 @@
-@import "../scss/base.scss";
-@import "../components/Block.scss";
+@import "../../scss/base.scss";
+@import "./Block.scss";
 
 .dialog {
   @include position(f, left, 50%, top, 50%, 100);

@@ -1,7 +1,7 @@
 import React from "react";
-import Block from "./Block";
-import Heading from "./Heading";
-import InfoList from "./InfoList";
+import Block from "./Common/Block";
+import Heading from "./Common/Heading";
+import InfoList from "./Common/InfoList";
 
 const PersonInfoList = () => {
   return (

@@ -1,8 +1,8 @@
 import React from "react";
-import Profile from "../Profile";
+import Profile from "../Common/Profile";
 import pic1 from "../../assets/profile1.jpg";
-import Block from "../Block";
-import Button from "../Button";
+import Block from "../Common/Block";
+import Button from "../Common/Button";
 
 const BoardCard = ({ types }) => {
   return (
