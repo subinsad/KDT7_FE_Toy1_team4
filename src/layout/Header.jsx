@@ -1,8 +1,8 @@
 import React from "react";
-import Logo from "../components/Logo";
-import Gnb from "../components/Gnb";
+import Logo from "../components/Common/Logo";
+import Gnb from "../components/Common/Gnb";
+import Button from "../components/Common/Button";
 import "./Header.scss";
-import Button from "../components/Button";
 
 const Header = () => {
   return (

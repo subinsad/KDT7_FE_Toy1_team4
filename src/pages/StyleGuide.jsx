@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Heading from "../components/Heading";
-import Block from "../components/Block";
+import Heading from "../components/Common/Heading";
+import Block from "../components/Common/Block";
 import Board from "../components/Board/Board";
-import Profile from "../components/Profile";
+import Profile from "../components/Common/Profile";
 import pic1 from "../assets/profile1.jpg";
 import BusinessCard from "../components/BusinessCard";
-import Text from "../components/Text";
-import Dialog from "../components/Dialog";
-import Button from "../components/Button";
-import Badge from "../components/Badge";
+import Text from "../components/Common/Text";
+import Dialog from "../components/Common/Dialog";
+import Button from "../components/Common/Button";
+import Badge from "../components/Common/Badge";
 import Input from "../components/Form/Input";
 import Select from "../components/Form/Select";
 import { testOption, tel } from "../data/selectOption";
@@ -34,6 +34,7 @@ const StyleGuide = () => {
       <hr />
 
       <Text type={"type1"} text={"type1"} />
+      <Text type={"type2"} text={"type2"} />
 
       <hr />
 
@@ -76,6 +77,10 @@ const StyleGuide = () => {
           setModal(true);
         }}
       />
+      <Dialog openModal={modal} closeModal={() => setModal(false)} title={"popuptitle"}>
+        팝업내용
+      </Dialog>
+
       <Button
         className={"btn regular primary"}
         text="경고창"
@@ -83,9 +88,6 @@ const StyleGuide = () => {
           setAlertModal(true);
         }}
       />
-      <Dialog openModal={modal} closeModal={() => setModal(false)} title={"popuptitle"}>
-        팝업내용
-      </Dialog>
 
       <Dialog openModal={alertModal} closeModal={() => setAlertModal(false)} className={"alert"}>
         경고창
@@ -95,7 +97,7 @@ const StyleGuide = () => {
 
       <Input width={"20rem"} />
       <br />
-      <Select placeholder={"선택하세요"} options={tel} onChangeOption={nullOption} />
+      <Select placeholder={"선택하세요"} options={testOption} onChangeOption={nullOption} />
       <br />
       <Textarea width={"100%"} height={"10rem"} />
       <br />
@@ -106,7 +108,10 @@ const StyleGuide = () => {
       <hr />
 
       <PersonInfoList />
-      <TimeBlock time={"11:00:20"} title={"현재시각"} />
+      <TimeBlock time={"11:00:20"} title={"현재시각"} icon={"ico1"} />
+      <TimeBlock time={"11:00:20"} title={"근무종료"} icon={"ico2"} />
+      <TimeBlock time={"11:00:20"} title={"근무시각"} icon={"ico3"} />
+      <TimeBlock time={"11:00:20"} title={"현재시각"} icon={"ico4"} />
     </div>
   );
 };

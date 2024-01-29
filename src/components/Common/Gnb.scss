@@ -1,5 +1,5 @@
 @use "sass:list";
-@import "../scss/base.scss";
+@import "../../scss/base.scss";
 
 $Gnb: (
   1: (
@@ -16,6 +16,9 @@ $Gnb: (
   ),
   5: (
     "icon": "\F194",
+  ),
+  6: (
+    "icon": "\F4D4",
   ),
 );
 @mixin gnbIcon($index, $icon) {
