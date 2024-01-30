@@ -5,13 +5,21 @@ import Text from "../components/Common/Text";
 import Input from "../components/Form/Input";
 import Textarea from "../components/Form/Textarea";
 import "./AddPost.scss"
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { getDoc, doc } from "firebase/firestore";
-import { db, auth } from "../firebase";
+import { db, auth, storage } from "../firebase";
 import AddFile from "../components/Form/AddFile";
+import { useNavigate } from 'react-router-dom';
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 
 const AddPost = () => {
+
+    const navigate = useNavigate();
+    const goTolist = () => {
+        navigate('/notice')
+    }
+
     const [isLoading, setLoading] = useState(false)
     const [title, setTitle] = useState("")
     const [textContent, setTextContent] = useState("")
@@ -53,7 +61,13 @@ const AddPost = () => {
         if (isLoading || title === "" || title.length > 50) return;
 
         try {
+            const userConfirmed = window.confirm("글을 등록하시겠습니까?")
+            if (!userConfirmed) {
+                return
+            }
             setLoading(true);
+
+            const user = auth.currentUser || virtualUser;
 
             const docRef = await addDoc(collection(db, "posts"), {
                 title,
@@ -63,13 +77,29 @@ const AddPost = () => {
                 // userId: user.uid,
                 usernames: virtualUser.displayName || "익명",
                 userId: virtualUser.uid,
+
             });
 
-            // docRef에 있는 ID를 통해 해당 글의 데이터를 가져올 수 있습니다.
+            // docRef에 있는 ID를 통해 해당 글의 데이터를 가져옴
             const newPostId = docRef.id;
             const newPostData = (await getDoc(doc(db, "posts", newPostId))).data();
 
             console.log("글이 성공적으로 등록되었습니다.", newPostData);
+
+            if (file) {
+                const locationRef = ref(storage, `posts/${virtualUser.uid}-${user.displayName}/${docRef.id}`)
+                const result = await uploadBytes(locationRef, file)
+                const url = await getDownloadURL(result.ref)
+                await updateDoc(docRef, {
+                    photo: url
+                })
+            }
+
+            //초기화
+            setTitle("")
+            setFile(null)
+            setTextContent("")
+
         } catch (error) {
             console.error("글 등록 중 오류 발생:", error);
         } finally {
@@ -121,11 +151,11 @@ const AddPost = () => {
 
                         <div>
                             <Text type={"type2"} text={"제목 : "} value={title} maxLength={50} />
-                            <Input width={"100%"} onChange={onChangeTitle} />
+                            <Input width={"100%"} onChange={onChangeTitle} required />
                         </div>
 
                         <div>
-                            <Text type={"type2"} text={"내용 : "} value={textContent} />
+                            <Text type={"type2"} text={"내용 : "} value={textContent} required />
                             <Textarea onChange={onChangeTextContent} placeholder="글을 작성해주세요." width={"100%"} height={"22rem"} />
 
                         </div>
@@ -137,7 +167,7 @@ const AddPost = () => {
                                 value={isLoading ? "Loading" : "Post"}
                             />
                             {/* 뒤로가기 색상추가 고려(회색) */}
-                            <button type="button" className="btn regular danger " >뒤로가기</button>
+                            <button type="button" className="btn regular danger" onClick={goTolist} >뒤로가기</button>
                         </div>
 
                     </div>
