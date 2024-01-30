@@ -102,10 +102,11 @@ const StyleGuide = () => {
       <br />
       <Textarea width={"100%"} height={"10rem"} />
       <br />
-      {/* 체크박스 라디오버튼 디자인필요 */}
-      {/* https://react.pixelstrap.com/cuba-context/app/ecommerce/product/Rome#javascript */}
-      <Checkbox type={"type1"} id={"chk1_1"} text="선택하세요" />
-      <Radio type={"type1"} id={"chk1_1"} text="선택하세요" />
+      <Checkbox type={"type1"} id={"chk1_1"} checked text="선택하세요" />
+      <Checkbox type={"type1"} id={"chk1_2"} text="선택하세요" />
+      <br />
+      <Radio type={"type1"} name="rag" id={"ra1_1"} text="선택1" checked />
+      <Radio type={"type1"} name="rag" id={"ra1_2"} text="선택2" />
 
       <hr />
 
