@@ -2,8 +2,19 @@
 
 .notice{
     &__wrapper{
-        #file{
-            
-}
+        &__contents{
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+
+            .file{
+            display: none;
+            }
+
+            .btn-box{
+                gap: 2rem;
+            }
+        }
+
     }
 }
