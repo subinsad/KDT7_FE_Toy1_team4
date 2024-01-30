@@ -17,6 +17,7 @@ import Checkbox from "../components/Form/Checkbox";
 import PersonInfoList from "../components/PersonInfoList";
 import TimeBlock from "../components/TimeBlock";
 import Radio from "../components/Form/Radio";
+import AddFile from "../components/Form/AddFile";
 
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);
@@ -106,8 +107,8 @@ const StyleGuide = () => {
       <Checkbox type={"type1"} id={"chk1_2"} text="선택하세요" />
       <br />
       <Radio type={"type1"} name="rag" id={"ra1_1"} text="선택1" checked />
-      <Radio type={"type1"} name="rag" id={"ra1_2"} text="선택2" />
-
+      <Radio type={"type1"} name="rag" id={"ra1_2"} text="선택2" checked />
+      <AddFile id={"file1_1"} text="첨부파일" />
       <hr />
 
       <PersonInfoList />

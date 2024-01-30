@@ -116,3 +116,20 @@ $checkboxRadio: (
   width: var(--width);
   height: var(--height);
 }
+
+.addfile {
+  @include a11y-hidden;
+  + label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8rem;
+    border: 0.2rem dashed $primary;
+    color: $primary;
+    background-color: rgba($primary, 0.2);
+    font-weight: 600;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+  }
+}
