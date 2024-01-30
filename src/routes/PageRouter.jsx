@@ -7,6 +7,8 @@ import StyleGuide from "../pages/StyleGuide";
 import Login from "../pages/Login";
 import Join from "../pages/Join";
 import Layout from "../layout/Layout";
+import AddPost from "../pages/AddPost";
+
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
         path: "styleguide",
         element: <StyleGuide />,
       },
+      {
+        path: "/AddPost",
+        element: <AddPost />,
+      }
     ],
   },
   {

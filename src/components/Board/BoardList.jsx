@@ -16,7 +16,7 @@ const BoardList = ({ types }) => {
                 <li>
                     <a href="">
                         <Profile filename={pic1} />
-                        <div className="board__status">출근전</div>
+                        <div className="board__status">2023-01-29</div>
                         <div className="board__title">제목</div>
                         <div className="board__writer">작성자</div>
                     </a>
