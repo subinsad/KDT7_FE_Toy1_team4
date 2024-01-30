@@ -23,12 +23,17 @@ const StyleGuide = () => {
   const [modal, setModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
   const [ischecked, setIschecked] = useState(true);
+  const [isRadio, setIsRadio] = useState("option1");
 
   const nullOption = () => {
     return "";
   };
   const onChange = () => {
     setIschecked(!ischecked);
+  };
+
+  const radioChange = (e) => {
+    setIsRadio(e.target.value);
   };
 
   return (
@@ -116,8 +121,24 @@ const StyleGuide = () => {
       />
       <Checkbox type={"type1"} id={"chk1_2"} text="선택하세요" />
       <br />
-      <Radio type={"type1"} name="rag" id={"ra1_1"} text="선택1" checked />
-      <Radio type={"type1"} name="rag" id={"ra1_2"} text="선택2" checked />
+      <Radio
+        type={"type1"}
+        name="rag"
+        id={"ra1_1"}
+        text="선택1"
+        value="option1"
+        checked={isRadio === "option1"}
+        onChange={radioChange}
+      />
+      <Radio
+        type={"type1"}
+        name="rag"
+        id={"ra1_2"}
+        text="선택2"
+        value="option2"
+        checked={isRadio === "option2"}
+        onChange={radioChange}
+      />
       <AddFile id={"file1_1"} text="첨부파일" />
       <hr />
 
