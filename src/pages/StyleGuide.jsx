@@ -16,6 +16,7 @@ import Textarea from "../components/Form/Textarea";
 import Checkbox from "../components/Form/Checkbox";
 import PersonInfoList from "../components/PersonInfoList";
 import TimeBlock from "../components/TimeBlock";
+import Radio from "../components/Form/Radio";
 
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);
@@ -104,6 +105,7 @@ const StyleGuide = () => {
       {/* 체크박스 라디오버튼 디자인필요 */}
       {/* https://react.pixelstrap.com/cuba-context/app/ecommerce/product/Rome#javascript */}
       <Checkbox type={"type1"} id={"chk1_1"} text="선택하세요" />
+      <Radio type={"type1"} id={"chk1_1"} text="선택하세요" />
 
       <hr />
 
