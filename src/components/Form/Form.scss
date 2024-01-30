@@ -32,23 +32,16 @@ $checkboxRadio: (
   1: (
     "class": "check-type1",
     "offImg": "ico_check_off.svg",
-    "onImg": "ico_check_on.svg",
+    "onImg": "ico_check_on2.svg",
     "width": 1.9rem,
     "height": 1.9rem,
   ),
   2: (
     "class": "radio-type1",
-    "offImg": "ico_check_off.svg",
-    "onImg": "ico_check2_on.svg",
-    "width": 1.8rem,
-    "height": 1.8rem,
-  ),
-  3: (
-    "class": "radio-type1",
-    "offImg": "ico_check_off.svg",
-    "onImg": "ico_check2_on.svg",
-    "width": 1.8rem,
-    "height": 1.8rem,
+    "offImg": "ico_radio_off.svg",
+    "onImg": "ico_radio_on.svg",
+    "width": 1.9rem,
+    "height": 1.9rem,
   ),
 );
 
@@ -122,4 +115,21 @@ $checkboxRadio: (
   padding-bottom: 1rem;
   width: var(--width);
   height: var(--height);
+}
+
+.addfile {
+  @include a11y-hidden;
+  + label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8rem;
+    border: 0.2rem dashed $primary;
+    color: $primary;
+    background-color: rgba($primary, 0.2);
+    font-weight: 600;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+  }
 }
