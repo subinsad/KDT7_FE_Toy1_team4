@@ -22,9 +22,13 @@ import AddFile from "../components/Form/AddFile";
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
+  const [ischecked, setIschecked] = useState(true);
 
   const nullOption = () => {
     return "";
+  };
+  const onChange = () => {
+    setIschecked(!ischecked);
   };
 
   return (
@@ -103,7 +107,13 @@ const StyleGuide = () => {
       <br />
       <Textarea width={"100%"} height={"10rem"} />
       <br />
-      <Checkbox type={"type1"} id={"chk1_1"} checked text="선택하세요" />
+      <Checkbox
+        type={"type1"}
+        id={"chk1_1"}
+        text="선택하세요"
+        checked={ischecked}
+        onChange={onChange}
+      />
       <Checkbox type={"type1"} id={"chk1_2"} text="선택하세요" />
       <br />
       <Radio type={"type1"} name="rag" id={"ra1_1"} text="선택1" checked />
