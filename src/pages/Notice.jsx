@@ -5,7 +5,7 @@ import BoardList from "../components/PostComponents/PostBoard";
 import { useNavigate } from 'react-router-dom';
 import PostList from '../components/PostComponents/PostList';
 import PostBoard from "../components/PostComponents/PostBoard";
-import { Provider } from "react-redux";
+
 
 const Notice = () => {
 

@@ -5,6 +5,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from "../../firebase";
 import Block from "../Common/Block";
 import Heading from "../Common/Heading";
+import { BeatLoader } from "react-spinners";
 
 const PostDetailText = () => {
     const { userId } = useParams();
@@ -35,7 +36,11 @@ const PostDetailText = () => {
     }, [userId]);
 
     if (loading) {
-        return <p>Loading...</p>;
+        return (
+            <div className="align vm center">
+                <BeatLoader size={15} color="#7366ff" />
+            </div>
+        );
     }
 
     if (!post) {
