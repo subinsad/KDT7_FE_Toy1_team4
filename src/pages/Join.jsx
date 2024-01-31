@@ -15,7 +15,6 @@ const Join = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -27,20 +26,18 @@ const Join = () => {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
-    } else if (name === "phone") {
-      setPhone(value);
     }
   };
   const onSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (name === "" || email === "" || password === "" || phone === "") {
+    if (name === "" || email === "" || password === "") {
       setError("모든 필드를 입력해 주세요.");
       return;
     }
     try {
       setLoading(true);
-      const createID = await createUserWithEmailAndPassword(auth, email, password, phone);
+      const createID = await createUserWithEmailAndPassword(auth, email, password);
       console.log(auth);
       await updateProfile(createID.user, {
         displayName: name,
@@ -64,8 +61,6 @@ const Join = () => {
         <form onSubmit={onSubmit}>
           <label htmlFor="name">Name</label>
           <Input onChange={onChange} width={"100%"} id="name" name="name" type="text" required />
-          <label htmlFor="phone">Phone</label>
-          <Input onChange={onChange} width={"100%"} id="phone" name="phone" type="tel" required />
           <label htmlFor="email">Email</label>
           <Input onChange={onChange} width={"100%"} id="email" name="email" type="email" required />
           <label htmlFor="password">Password</label>
