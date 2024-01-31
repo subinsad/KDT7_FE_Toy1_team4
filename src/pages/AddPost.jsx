@@ -10,7 +10,8 @@ import { getDoc, doc } from "firebase/firestore";
 import { db, auth, storage } from "../firebase";
 import AddFile from "../components/Form/AddFile";
 import { useNavigate } from 'react-router-dom';
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import PostList from '../components/PostComponents/PostList';;
 
 
 const AddPost = () => {
@@ -141,7 +142,7 @@ const AddPost = () => {
                     <div className="notice__wrapper__contents">
                         <div className="align">
                             <Text type={"type2"} text={"작성자 : "} />
-                            <Text type={"type1"} text={"수빈"} />
+                            <Text type={"type1"} text={"userId"} />
                         </div>
 
                         <div className="file">
@@ -174,8 +175,6 @@ const AddPost = () => {
 
                 </form>
             </Block>
-
-
         </div>
     );
 };
