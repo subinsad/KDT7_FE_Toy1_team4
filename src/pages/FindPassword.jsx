@@ -5,83 +5,64 @@ import Text from "../components/Common/Text";
 import Input from "../components/Form/Input";
 import Button from "../components/Common/Button";
 import "./Login.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { Link } from "react-router-dom";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase";
 import { FirebaseError } from "firebase/app";
 
-const Login = () => {
-  const navigate = useNavigate();
-
+const FindPassword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sendMail, setSendMail] = useState(false);
 
   const onChange = (e) => {
     const { name, value } = e.target;
     if (name === "email") {
       setEmail(value);
-    } else if (name === "password") {
-      setPassword(value);
     }
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (email === "" || password === "") {
-      setError("모든 필드를 입력해 주세요.");
+    if (email === "") {
+      setError("회원가입하셨던 이메일을 입력해 주세요.");
       return;
     }
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(auth, email, password);
-
-      navigate("/main");
+      await sendPasswordResetEmail(auth, email);
     } catch (error) {
       if (error instanceof FirebaseError) {
         setError(error.message);
       }
     } finally {
       setLoading(false);
+      setSendMail(true);
     }
   };
   return (
     <div className="login__wrapper">
       <Block className="login">
-        <Heading size={"regular"} tag={"h1"} text={"Login"} />
-        <Text text={"로그인을 하시려면 이메일과 비밀번호를 입력하세요."} type={"type1"} />
+        <Heading size={"regular"} tag={"h1"} text={"Find Password"} />
+        <Text text={"회원가입했던 이메일을 작성해주세요."} type={"type1"} />
+        <Text text={"비밀번호 변경링크를 메일로 보내드립니다."} type={"type1"} />
         <form onSubmit={onSubmit}>
           <label htmlFor="email">Email</label>
           <Input onChange={onChange} width={"100%"} id="email" type="email" name="email" required />
-          <label htmlFor="password">Password</label>
-          <Input
-            onChange={onChange}
-            width={"100%"}
-            id="password"
-            name="password"
-            type="password"
-            required
-          />
           <Button
             type="submit"
             className={"btn regular primary"}
-            text={loading ? "Loading..." : "Login"}
+            text={loading ? "Loading..." : "비밀번호 찾기"}
           />
         </form>
         {error !== "" ? <div className="error"> {error}</div> : null}
+        {sendMail && <div className="error">이메일이 발송되었습니다.</div>}
         <div className="join-wrap">
-          <Text text={"계정이 없으시다면 회원가입을 해주세요."} type={"type2"} />
-          <Link to="/join">
-            <Button className={"btn regular white"} text="Join" />
-          </Link>
-          <Text
-            text={"비밀번호가 기억나지 않는다면 비밀번호 찾기를 클릭해주세요."}
-            type={"type2"}
-          />
-          <Link to="/findpassword">
-            <Button className={"btn regular white"} text="비밀번호 찾기" />
+          <Text text={"로그인페이지 바로가기"} type={"type2"} />
+          <Link to="/login">
+            <Button className={"btn regular white"} text="Login" />
           </Link>
         </div>
       </Block>
@@ -89,4 +70,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default FindPassword;

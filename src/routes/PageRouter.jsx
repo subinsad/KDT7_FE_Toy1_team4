@@ -9,6 +9,7 @@ import Join from "../pages/Join";
 import Layout from "../layout/Layout";
 import ProtectedRoute from "./ProtectedRoute";
 import MainContent from "../pages/MainContent";
+import FindPassword from "../pages/FindPassword";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/join",
     element: <Join />,
+  },
+  {
+    path: "/findpassword",
+    element: <FindPassword />,
   },
 ]);
 export default router;

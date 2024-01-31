@@ -6,7 +6,7 @@ $buttonSize: (
     "class": "regular",
     "fontSize": 1.4rem,
     "height": 3.5rem,
-    "border": 0,
+    "border": 0.1rem,
     "padding": 1.75rem,
   ),
   2: (
@@ -35,6 +35,12 @@ $buttonColor: (
     "borderColor": #54ba4a,
     "bgColor": #54ba4a,
     "color": $white,
+  ),
+  4: (
+    "class": "white",
+    "borderColor": #2c323f,
+    "bgColor": #fff,
+    "color": #2c323f,
   ),
 );
 $buttonIcon: (
