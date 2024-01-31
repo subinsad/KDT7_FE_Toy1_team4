@@ -3,9 +3,9 @@ import PostDetailText from "../components/PostComponents/PostDetailText";
 
 const PostDetail = () => {
     return (
-        <Block>
+        <>
             <PostDetailText />
-        </Block>
+        </>
 
     );
 };

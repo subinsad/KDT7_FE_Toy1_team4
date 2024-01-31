@@ -9,6 +9,8 @@ import Join from "../pages/Join";
 import Layout from "../layout/Layout";
 import AddPost from "../pages/AddPost";
 import PostDetail from "../pages/PostDetail";
+import ProtectedRoute from "../components/PostComponents/protected-route";
+import LoginTest from "../components/PostComponents/logintest";
 
 
 const router = createBrowserRouter([
@@ -34,11 +36,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/AddPost",
-        element: <AddPost />,
+        element:
+          <ProtectedRoute>
+            <AddPost />
+          </ProtectedRoute>
+        ,
       },
       {
-        path: "/post/:postId",
+        path: "/posts/:userId",
         element: <PostDetail />,
+      },
+      {
+        path: "/logintest",
+        element: <LoginTest />
       }
 
     ],

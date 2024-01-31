@@ -11,10 +11,10 @@ import { db, auth, storage } from "../firebase";
 import AddFile from "../components/Form/AddFile";
 import { useNavigate } from 'react-router-dom';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
-import PostList from '../components/PostComponents/PostList';;
 
 
-const AddPost = () => {
+
+const AddPost = ({ usernames }) => {
 
     const navigate = useNavigate();
     const goTolist = () => {
@@ -41,23 +41,9 @@ const AddPost = () => {
         }
     }
 
-    const generateRandomUser = () => {
-        // 가상 사용자 정보 생성 (예시)
-        const randomUserId = "user_" + Math.floor(Math.random() * 1000);
-        const randomDisplayName = "User " + randomUserId;
-
-        return {
-            uid: randomUserId,
-            displayName: randomDisplayName,
-        };
-    }
-
     const onSubmit = async (e) => {
         e.preventDefault();
-        //const user = auth.currentUser;
-
-        // 가상 사용자 정보 생성
-        const virtualUser = generateRandomUser();
+        const user = auth.currentUser;
 
         if (isLoading || title === "" || title.length > 50) return;
 
@@ -68,16 +54,12 @@ const AddPost = () => {
             }
             setLoading(true);
 
-            const user = auth.currentUser || virtualUser;
-
             const docRef = await addDoc(collection(db, "posts"), {
                 title,
                 textContent,
-                createAt: Date.now(),
-                // usernames: user.displayName || "익명",
-                // userId: user.uid,
-                usernames: virtualUser.displayName || "익명",
-                userId: virtualUser.uid,
+                createAt: new Date().toLocaleString(),
+                usernames: usernames || "익명",
+                userId: user.uid,
 
             });
 
@@ -88,7 +70,7 @@ const AddPost = () => {
             console.log("글이 성공적으로 등록되었습니다.", newPostData);
 
             if (file) {
-                const locationRef = ref(storage, `posts/${virtualUser.uid}-${user.displayName}/${docRef.id}`)
+                const locationRef = ref(storage, `posts/${user.uid}/${docRef.id}`)
                 const result = await uploadBytes(locationRef, file)
                 const url = await getDownloadURL(result.ref)
                 await updateDoc(docRef, {
@@ -108,29 +90,7 @@ const AddPost = () => {
         }
     }
 
-    // const onSubmit = async (e) => {
-    //     // e.preventDefault(); !user ||
-    //     const user = auth.currentUser
-    //     if (isLoading || title === "" || title.length > 50) return; {
-    //         try {
-    //             setLoading(true);
 
-    //             await addDoc(collection(db, "posts"), {
-    //                 title,
-    //                 textContent,
-    //                 createAt: Date.now(),
-    //                 usernames: user.displayName || "익명",
-    //                 userId: user.uid,
-    //             })
-
-
-    //         } catch (e) {
-    //             console.log(e)
-    //         } finally {
-    //             setLoading(false)
-    //         }
-    //     } console.log(posts)
-    // }
     return (
         <div className="notice__wrapper">
             <Block>
@@ -142,7 +102,8 @@ const AddPost = () => {
                     <div className="notice__wrapper__contents">
                         <div className="align">
                             <Text type={"type2"} text={"작성자 : "} />
-                            <Text type={"type1"} text={"userId"} />
+                            <Text type={"type1"} text={usernames || "익명"} />
+
                         </div>
 
                         <div className="file">
