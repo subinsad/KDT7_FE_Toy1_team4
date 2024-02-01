@@ -16,13 +16,24 @@ import Textarea from "../components/Form/Textarea";
 import Checkbox from "../components/Form/Checkbox";
 import PersonInfoList from "../components/PersonInfoList";
 import TimeBlock from "../components/TimeBlock";
+import Radio from "../components/Form/Radio";
+import AddFile from "../components/Form/AddFile";
 
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
+  const [ischecked, setIschecked] = useState(true);
+  const [isRadio, setIsRadio] = useState("option1");
 
   const nullOption = () => {
     return "";
+  };
+  const onChange = () => {
+    setIschecked(!ischecked);
+  };
+
+  const radioChange = (e) => {
+    setIsRadio(e.target.value);
   };
 
   return (
@@ -101,10 +112,34 @@ const StyleGuide = () => {
       <br />
       <Textarea width={"100%"} height={"10rem"} />
       <br />
-      {/* 체크박스 라디오버튼 디자인필요 */}
-      {/* https://react.pixelstrap.com/cuba-context/app/ecommerce/product/Rome#javascript */}
-      <Checkbox type={"type1"} id={"chk1_1"} text="선택하세요" />
-
+      <Checkbox
+        type={"type1"}
+        id={"chk1_1"}
+        text="선택하세요"
+        checked={ischecked}
+        onChange={onChange}
+      />
+      <Checkbox type={"type1"} id={"chk1_2"} text="선택하세요" />
+      <br />
+      <Radio
+        type={"type1"}
+        name="rag"
+        id={"ra1_1"}
+        text="선택1"
+        value="option1"
+        checked={isRadio === "option1"}
+        onChange={radioChange}
+      />
+      <Radio
+        type={"type1"}
+        name="rag"
+        id={"ra1_2"}
+        text="선택2"
+        value="option2"
+        checked={isRadio === "option2"}
+        onChange={radioChange}
+      />
+      <AddFile id={"file1_1"} text="첨부파일" />
       <hr />
 
       <PersonInfoList />
