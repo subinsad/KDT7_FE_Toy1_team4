@@ -79,9 +79,10 @@ export default function PostList() {
                             <div className="board__title">{post.title}</div>
                             <div className="board__writer">{post.usernames}</div>
                         </a>
-                        <div className="board__more">
-                            <Button className={"btn-more"} onClick={() => handleBtn(post.id)} />
-                            {user?.uid === post.userId ? (
+
+                        {user?.uid === post.userId ? (
+                            <div className="board__more">
+                                <Button className={"btn-more"} onClick={() => handleBtn(post.id)} />
                                 <dialog open={dialogStates[post.id] || false} >
                                     <ul>
                                         <li>
@@ -92,11 +93,12 @@ export default function PostList() {
                                         </li>
                                     </ul>
                                 </dialog>
-                            ) : null}
-                        </div>
+                            </div>
+                        ) : null}
                     </li>
                 ))}
             </ul>
         </div>
     );
+
 }
