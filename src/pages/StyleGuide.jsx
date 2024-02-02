@@ -18,6 +18,8 @@ import PersonInfoList from "../components/PersonInfoList";
 import TimeBlock from "../components/TimeBlock";
 import Radio from "../components/Form/Radio";
 import AddFile from "../components/Form/AddFile";
+import ProfileEdit from "../components/Common/ProfileEdit";
+import InputDate from "../components/Form/InputDate";
 
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);
@@ -52,6 +54,7 @@ const StyleGuide = () => {
       <Button className={"btn regular primary"} text="btn regular primary" />
       <Button className={"btn regular danger"} text="btn regular danger" />
       <Button className={"btn regular success"} text="btn regular success" />
+      <Button className={"btn regular white"} text="btn regular white" />
       <br />
       <Badge situation={"primary"} text={"primary"} />
       <Badge situation={"danger"} text={"danger"} />
@@ -65,6 +68,9 @@ const StyleGuide = () => {
 
       {/* 파일은 import해서 적용해야함. */}
       <Profile filename={pic1} />
+      <ProfileEdit>
+        <Profile filename={pic1} />
+      </ProfileEdit>
 
       <hr />
 
@@ -111,6 +117,9 @@ const StyleGuide = () => {
       <Select placeholder={"선택하세요"} options={testOption} onChangeOption={nullOption} />
       <br />
       <Textarea width={"100%"} height={"10rem"} />
+      <br />
+      <InputDate placehodler={"시작일"} />
+      <br />
       <br />
       <Checkbox
         type={"type1"}
