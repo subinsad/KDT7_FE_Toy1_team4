@@ -19,7 +19,7 @@ import TimeBlock from "../components/TimeBlock";
 import Radio from "../components/Form/Radio";
 import AddFile from "../components/Form/AddFile";
 import ProfileEdit from "../components/Common/ProfileEdit";
-import Date from "../components/Form/Date";
+import InputDate from "../components/Form/InputDate";
 
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);
@@ -118,7 +118,7 @@ const StyleGuide = () => {
       <br />
       <Textarea width={"100%"} height={"10rem"} />
       <br />
-      <Date placehodler={"시작일"} />
+      <InputDate placehodler={"시작일"} />
       <br />
       <br />
       <Checkbox
