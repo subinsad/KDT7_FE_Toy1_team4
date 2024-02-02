@@ -17,7 +17,7 @@ const Gnb = () => {
         </li>
         <li className="ico3">
           <Link to="/attendance">
-            <span>근태현황</span>
+            <span>근태신청</span>
           </Link>
         </li>
         <li className="ico4">
