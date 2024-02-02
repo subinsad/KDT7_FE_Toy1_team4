@@ -22,3 +22,25 @@
     grid-row: 1 / -1;
   }
 }
+.profile-edit {
+  display: inline-block;
+  position: relative;
+  input {
+    display: none;
+  }
+  label {
+    @include position(a, right, -0.5rem, bottom, 0.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    background: $white;
+    border-radius: 100%;
+    box-shadow: 0 0 0.6rem 0.3rem rgba(68, 102, 242, 0.1);
+    cursor: pointer;
+    svg {
+      fill: $black;
+    }
+  }
+}
