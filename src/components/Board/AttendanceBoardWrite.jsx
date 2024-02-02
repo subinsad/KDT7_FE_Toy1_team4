@@ -4,6 +4,7 @@ import Block from "../Common/Block";
 import Button from "../Common/Button";
 import Input from "../Form/Input";
 import Select from "../Form/Select";
+import InputDate from "../Form/InputDate";
 import { attendanceOption } from "../../data/selectOption";
 import Textarea from "../Form/Textarea";
 import { useNavigate } from "react-router";
@@ -95,9 +96,9 @@ const AttendanceBoardWrite = () => {
               onChange={onChange}
             />
             <div className="date-group">
-              <input type="date" name="startdate" onChange={onChange} required />
+              <InputDate name="startdate" onChange={onChange} required placehodler={"시작일"} />
               ~
-              <input type="date" name="enddate" onChange={onChange} required />
+              <InputDate name="enddate" onChange={onChange} required placehodler={"종료일"} />
             </div>
           </div>
           <div className="btn-group">
