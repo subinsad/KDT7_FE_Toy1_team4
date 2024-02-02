@@ -7,9 +7,17 @@ import StyleGuide from "../pages/StyleGuide";
 import Login from "../pages/Login";
 import Join from "../pages/Join";
 import Layout from "../layout/Layout";
+<<<<<<< HEAD
 import ProtectedRoute from "./ProtectedRoute";
 import MainContent from "../pages/MainContent";
 import FindPassword from "../pages/FindPassword";
+=======
+import AddPost from "../pages/AddPost";
+import PostDetail from "../pages/PostDetail";
+import ProtectedRoute from "../components/PostComponents/protected-route";
+import LoginTest from "../components/PostComponents/logintest";
+
+>>>>>>> feature/board
 
 const router = createBrowserRouter([
   {
@@ -40,6 +48,23 @@ const router = createBrowserRouter([
         path: "styleguide",
         element: <StyleGuide />,
       },
+      {
+        path: "/AddPost",
+        element:
+          <ProtectedRoute>
+            <AddPost />
+          </ProtectedRoute>
+        ,
+      },
+      {
+        path: "/posts/:userId",
+        element: <PostDetail />,
+      },
+      {
+        path: "/logintest",
+        element: <LoginTest />
+      }
+
     ],
   },
   {

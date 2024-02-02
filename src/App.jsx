@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Loading from "./components/Common/Loading";
 import { auth } from "./firebase";
 
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const init = async () => {
