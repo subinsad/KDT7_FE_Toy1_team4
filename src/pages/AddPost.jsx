@@ -126,7 +126,7 @@ const AddPost = ({ usernames }) => {
 
                         <div className="align right btn-box">
                             <Input width={"100%"} type="submit" className="btn regular primary"
-                                value={isLoading ? "Loading" : "Post"}
+                                value={isLoading ? "Loading" : "Post"} onClick={goTolist}
                             />
                             {/* 뒤로가기 색상추가 고려(회색) */}
                             <button type="button" className="btn regular danger" onClick={goTolist} >뒤로가기</button>

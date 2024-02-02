@@ -53,9 +53,9 @@ export default function PostList() {
         try {
             const snapshot = await getDocs(postsQuery);
             const newPosts = snapshot.docs.map(doc => {
-                const { title, textContent, createAt, userId, usernames, photo } = doc.data();
+                const { title, textContent, createAt, userId, username, photo } = doc.data();
                 return {
-                    title, textContent, createAt, userId, usernames, photo, id: doc.id
+                    title, textContent, createAt, userId, username, photo, id: doc.id
                 };
             });
             setPosts(newPosts);
@@ -70,14 +70,14 @@ export default function PostList() {
 
     return (
         <div className="list">
-            <ul className={"board"}>
+            <ul className={"board"} >
                 {posts.map(post => (
                     <li key={post.id}>
-                        <a href="" onClick={() => ViewPost(post.id)}>
-                            <Profile filename={"pic1"} />
+                        <a href="" onClick={() => ViewPost(post.id)} >
+                            <Profile filename={post.photo} />
                             <div className="board__status">{post.createAt}</div>
                             <div className="board__title">{post.title}</div>
-                            <div className="board__writer">{post.usernames}</div>
+                            <div className="board__writer">{post.username}</div>
                         </a>
 
                         {user?.uid === post.userId ? (

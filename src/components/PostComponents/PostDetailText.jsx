@@ -47,6 +47,9 @@ const PostDetailText = () => {
     const onDelete = async (postId, userId, photo) => {
         const ok = window.confirm("삭제하시겠습니까?");
         if (!ok || user?.uid !== userId) return;
+
+        console.log("Deleting post. PostId:", postId, "UserId:", userId);
+
         try {
             // postId를 사용하여 deleteDoc 호출
             await deleteDoc(doc(db, "posts", postId));
@@ -61,12 +64,15 @@ const PostDetailText = () => {
         }
     }
 
+
     const handleBtn = (postId) => {
+        console.log("Handling button click. PostId:", postId);
         setDialogStates((prevState) => ({
             ...prevState,
             [postId]: !prevState[postId]
         }));
     }
+
 
     if (loading) {
         return (
@@ -82,12 +88,12 @@ const PostDetailText = () => {
 
     return (
         <Block>
-            <ul className="align">
-                {posts.map(post => (
-                    <li key={post.id}>
+            <>
+                {posts && posts.map(post => (
+                    <li key={user.uid}>
                         <div className="align">
                             <Text type={"type1"} text={post.createAt} />
-                            <Text type={"type1"} text={post.usernames} />
+                            <Text type={"type1"} text={post.username} />
                         </div>
 
                         <Heading tag={"h2"} size={"small"} text={post.title} />
@@ -113,7 +119,7 @@ const PostDetailText = () => {
 
                     </li>
                 ))}
-            </ul>
+            </>
         </Block>
 
     );
