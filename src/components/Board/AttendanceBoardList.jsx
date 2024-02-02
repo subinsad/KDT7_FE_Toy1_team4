@@ -2,6 +2,7 @@ import React from "react";
 import Profile from "../Common/Profile";
 import pic1 from "../../assets/profile1.jpg";
 import Button from "../Common/Button";
+import { useNavigate } from "react-router";
 
 const AttendanceBoardList = () => {
   return (

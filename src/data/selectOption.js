@@ -26,3 +26,21 @@ export const tel = [
     text: "043",
   },
 ];
+export const attendanceOption = [
+  {
+    value: "연차",
+    text: "연차",
+  },
+  {
+    value: "반차",
+    text: "반차",
+  },
+  {
+    value: "조퇴",
+    text: "조퇴",
+  },
+  {
+    value: "기타",
+    text: "기타",
+  },
+];
