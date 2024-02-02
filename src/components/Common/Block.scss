@@ -5,6 +5,11 @@
   margin-bottom: 3rem;
   box-shadow: 0 0 2rem rgba($black, 0.05);
   background-color: $white;
+  &:first-child {
+    &:last-child {
+      margin: 0;
+    }
+  }
   .block {
     border-radius: 1rem;
     margin-bottom: 0;

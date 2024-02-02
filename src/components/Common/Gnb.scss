@@ -50,6 +50,7 @@ $Gnb: (
     transition: 0.3s;
     text-align: center;
     outline: none;
+    &.--active,
     &:focus,
     &:hover {
       color: $primary;
