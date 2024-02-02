@@ -7,10 +7,12 @@ import StyleGuide from "../pages/StyleGuide";
 import Login from "../pages/Login";
 import Join from "../pages/Join";
 import Layout from "../layout/Layout";
+import MainContent from "../pages/MainContent";
 import AddPost from "../pages/AddPost";
 import PostDetail from "../pages/PostDetail";
 import ProtectedRoute from "../components/PostComponents/protected-route";
 import LoginTest from "../components/PostComponents/logintest";
+import FindPassword from "../pages/FindPassword";
 
 
 const router = createBrowserRouter([
