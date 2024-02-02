@@ -133,3 +133,10 @@ $checkboxRadio: (
     border-radius: 0.5rem;
   }
 }
+.date {
+  @include background("ico_date.svg", right 1rem center, $white, 1.4rem auto);
+  @extend %form;
+  min-width: 13rem;
+  padding-right: 3rem;
+  font-family: $f-ko;
+}
