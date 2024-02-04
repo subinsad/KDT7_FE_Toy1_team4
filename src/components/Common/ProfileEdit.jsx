@@ -1,10 +1,10 @@
 import React from "react";
 import "./Profile.scss";
 
-const ProfileEdit = ({ children }) => {
+const ProfileEdit = ({ children,onAvatarChange }) => {
   return (
     <div className="profile-edit">
-      <input type="file" name="" id="profile-edit" />
+      <input type="file" name="" id="profile-edit" onChange={onAvatarChange}/>
       <label htmlFor="profile-edit" aria-label="프로필수정">
         <svg
           xmlns="http://www.w3.org/2000/svg"
