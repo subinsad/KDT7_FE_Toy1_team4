@@ -62,6 +62,7 @@ const AddPost = ({ usernames }) => {
                 userId: user.uid,
 
             });
+            navigate('/notice')
 
             // docRef에 있는 ID를 통해 해당 글의 데이터를 가져옴
             const newPostId = docRef.id;
@@ -126,7 +127,7 @@ const AddPost = ({ usernames }) => {
 
                         <div className="align right btn-box">
                             <Input width={"100%"} type="submit" className="btn regular primary"
-                                value={isLoading ? "Loading" : "Post"} onClick={goTolist}
+                                value={isLoading ? "Loading" : "Post"} onClick={onSubmit}
                             />
                             {/* 뒤로가기 색상추가 고려(회색) */}
                             <button type="button" className="btn regular danger" onClick={goTolist} >뒤로가기</button>
