@@ -1,37 +1,48 @@
-import React from "react";
-import Profile from "../Common/Profile";
-import pic1 from "../../assets/profile1.jpg";
-import Button from "../Common/Button";
-import { useNavigate } from "react-router";
+import React, { useEffect, useState } from "react";
+import { auth, db } from "../../firebase";
+import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestore";
+import AttendanceBoardListItem from "./AttendanceBoardListItem";
 
 const AttendanceBoardList = () => {
+  const user = auth.currentUser;
+  const [attends, setAttends] = useState([]);
+
+  useEffect(() => {
+    const fetchAttend = async () => {
+      const attendQuery = query(
+        collection(db, "attendance"),
+        orderBy("createdAt", "desc"),
+        limit(10)
+      );
+
+      const unsubscribe = await onSnapshot(attendQuery, (snapshot) => {
+        const attends = snapshot.docs.map((doc) => {
+          const { content, createdAt, startdate, enddate, select, title, userId, username } =
+            doc.data();
+          return {
+            content,
+            createdAt,
+            startdate,
+            enddate,
+            select,
+            title,
+            userId,
+            username,
+            id: doc.id,
+          };
+        });
+        setAttends(attends);
+      });
+      return () => unsubscribe();
+    };
+    fetchAttend();
+  }, []);
   return (
-    <div className={"list"}>
+    <div className={"list mt30"}>
       <ul className={"board"}>
-        <li>
-          <a href="">
-            <Profile filename={pic1} />
-            <div className="board__status">출근전</div>
-            <div className="board__title">제목</div>
-            <div className="board__writer">작성자</div>
-          </a>
-          <div className="board__more">
-            <Button className={"btn-more"} />
-            <dialog open>
-              <ul>
-                <li>
-                  <button>승인</button>
-                </li>
-                <li>
-                  <button>반려</button>
-                </li>
-                <li>
-                  <button>취소</button>
-                </li>
-              </ul>
-            </dialog>
-          </div>
-        </li>
+        {attends.map((attend) => (
+          <AttendanceBoardListItem key={attend.id} {...attend} />
+        ))}
       </ul>
     </div>
   );

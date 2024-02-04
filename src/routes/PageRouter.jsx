@@ -11,6 +11,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import MainContent from "../pages/MainContent";
 import FindPassword from "../pages/FindPassword";
 import AttendanceBoardWrite from "../components/Board/ATtendanceBoardWrite";
+import AttendanceBoardView from "../components/Board/AttendanceBoardView";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "attendance/write",
         element: <AttendanceBoardWrite />,
+      },
+      {
+        path: "attendance/view",
+        element: <AttendanceBoardView />,
       },
       {
         path: "mypage",

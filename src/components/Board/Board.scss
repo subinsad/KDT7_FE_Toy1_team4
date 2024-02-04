@@ -17,6 +17,12 @@
   }
   > li {
     position: relative;
+    .list & {
+      + li {
+        border-top: 0.1rem solid $formline;
+        padding-top: 1rem;
+      }
+    }
   }
   .block {
     padding: 2rem;
