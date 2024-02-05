@@ -20,6 +20,8 @@ import Radio from "../components/Form/Radio";
 import AddFile from "../components/Form/AddFile";
 import ProfileEdit from "../components/Common/ProfileEdit";
 import InputDate from "../components/Form/InputDate";
+import "./Mypage.scss";
+import bgMypage from "../assets/bg_mypage.png";
 
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);
@@ -74,7 +76,6 @@ const StyleGuide = () => {
 
       <hr />
 
-      {/*  */}
       <BusinessCard />
 
       <hr />
@@ -107,7 +108,17 @@ const StyleGuide = () => {
       />
 
       <Dialog openModal={alertModal} closeModal={() => setAlertModal(false)} className={"alert"}>
-        경고창
+        <div className="txt-center">알림내용을 입력하세요.</div>
+        <div className="align center mt20">
+          <Button className={"btn regular primary"} text="확인" />
+          <Button
+            className={"btn regular danger"}
+            text="취소"
+            onClick={() => {
+              setAlertModal(false);
+            }}
+          />
+        </div>
       </Dialog>
 
       <hr />
@@ -156,6 +167,72 @@ const StyleGuide = () => {
       <TimeBlock time={"11:00:20"} title={"근무종료"} icon={"ico2"} />
       <TimeBlock time={"11:00:20"} title={"근무시각"} icon={"ico3"} />
       <TimeBlock time={"11:00:20"} title={"현재시각"} icon={"ico4"} />
+
+      <hr />
+
+      <Block className="mypage__wrapper">
+        <div className="mypage__bg">
+          <img src={bgMypage} alt="" />
+        </div>
+        <div className="mypage__inner">
+          <div className="mypage__profile">
+            <ProfileEdit>
+              <Profile />
+            </ProfileEdit>
+            <div className="mypage__name">홍길동</div>
+            <div className="mypage__memo">한 줄 소개글이 등록되어 있지 않습니다.</div>
+          </div>
+          <div className="mypage__info">
+            <ul>
+              <li>
+                <strong>이메일</strong>
+                <div>123@123.com</div>
+              </li>
+              <li>
+                <strong>전화번호</strong>
+                <div>010-1234-1234</div>
+              </li>
+              <li aria-hidden="true"></li>
+              <li>
+                <strong>출근시간</strong>
+                <div>09:20</div>
+              </li>
+              <li>
+                <strong>근태상태</strong>
+                <div>
+                  <Badge situation={"success"} text={"근무중"} />
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="mypage__status">
+            <Button className={"btn regular primary"} text="근무시작" />
+            <Button className={"btn regular danger"} text="근무종료" disabled />
+          </div>
+        </div>
+      </Block>
+      <Board type={"list"} headingTag={"h2"} headingText={"나의 근태현황"} />
+
+      <Block className="form-type1">
+        <Heading tag={"h2"} size={"small"} text={"회원 정보 수정"} />
+        <label htmlFor="name">Name</label>
+        <Input width={"100%"} id="name" type="text" disabled value="현재이름" />
+        <label htmlFor="email">Email</label>
+        <Input width={"100%"} id="email" type="email" disabled value="123@123.com" />
+        <label htmlFor="introduce">한줄소개</label>
+        <Input width={"100%"} id="introduce" type="text" placehodler="한줄소개를 입력해주세요." />
+        <label htmlFor="tel">전화번호</label>
+        <Input width={"100%"} id="tel" type="tel" placeholder="숫자만 입력해주세요." />
+        <label htmlFor="job">직급</label>
+        <Input width={"100%"} id="job" type="text" placeholder="직급을 입력해주세요." />
+        <label htmlFor="">프로필사진</label>
+        <AddFile id={"file2_1"} text="첨부파일" />
+        <label htmlFor="">배경사진</label>
+        <AddFile id={"file2_2"} text="첨부파일" />
+        <div className="align center">
+          <Button className={"btn regular primary"} text="회원정보수정" />
+        </div>
+      </Block>
     </div>
   );
 };

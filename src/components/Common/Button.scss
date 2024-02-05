@@ -100,4 +100,8 @@ $buttonIcon: (
   @for $i from 1 through list.length($buttonIcon) {
     @include buttonIcon($i);
   }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }
