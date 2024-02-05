@@ -22,6 +22,7 @@ import ProfileEdit from "../components/Common/ProfileEdit";
 import InputDate from "../components/Form/InputDate";
 import "./Mypage.scss";
 import bgMypage from "../assets/bg_mypage.png";
+import BoardGallery from "../components/Board/BoardGallery";
 
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);
@@ -85,6 +86,7 @@ const StyleGuide = () => {
       */}
       <Board type={"card"} headingTag={"h2"} headingText={"Card List"} />
       <Board type={"list"} headingTag={"h2"} headingText={"Board List"} />
+      <BoardGallery />
 
       <hr />
 
