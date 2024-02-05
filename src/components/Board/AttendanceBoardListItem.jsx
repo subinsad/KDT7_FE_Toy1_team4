@@ -19,6 +19,7 @@ const AttendanceBoardListItem = ({
   id,
 }) => {
   const navigate = useNavigate();
+  const [isDialog, setIsDialog] = useState(false);
   const viewProps = {
     content,
     createdAt,
@@ -41,6 +42,9 @@ const AttendanceBoardListItem = ({
       </>
     );
   };
+  const onOption = () => {
+    setIsDialog(!isDialog);
+  };
   return (
     <li>
       <a href="" onClick={onInfo}>
@@ -53,17 +57,14 @@ const AttendanceBoardListItem = ({
       </a>
       {user?.uid === userId && (
         <div className="board__more">
-          <Button className={"btn-more"} />
-          <dialog>
+          <Button className={"btn-more"} onClick={onOption} />
+          <dialog open={isDialog}>
             <ul>
               <li>
                 <button>승인</button>
               </li>
               <li>
                 <button>반려</button>
-              </li>
-              <li>
-                <button>취소</button>
               </li>
             </ul>
           </dialog>

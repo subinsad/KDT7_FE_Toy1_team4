@@ -10,7 +10,7 @@ const AttendanceBoardList = () => {
   useEffect(() => {
     const fetchAttend = async () => {
       const attendQuery = query(
-        collection(db, "attendance"),
+        collection(db, `attendance`),
         orderBy("createdAt", "desc"),
         limit(10)
       );
