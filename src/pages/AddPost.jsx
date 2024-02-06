@@ -113,12 +113,10 @@ const AddPost = ({ usernames }) => {
                         </div>
 
                         <div>
-                            <Text type={"type2"} text={"제목 : "} value={title} maxLength={50} />
-                            <Input width={"100%"} onChange={onChangeTitle} required />
+                            <Input width={"100%"} placeholder="제목을 작성해주세요." onChange={onChangeTitle} required />
                         </div>
 
                         <div>
-                            <Text type={"type2"} text={"내용 : "} value={textContent} required />
                             <Textarea onChange={onChangeTextContent} placeholder="글을 작성해주세요." width={"100%"} height={"22rem"} />
 
                         </div>
