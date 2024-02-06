@@ -6,19 +6,26 @@ import { db } from "../../firebase";
 import Block from "../Common/Block";
 import Heading from "../Common/Heading";
 import { BeatLoader } from "react-spinners";
-import Button from "../Common/Button";
 import { getAuth } from 'firebase/auth';
 import { ref, deleteObject } from 'firebase/storage';
+import { useNavigate } from 'react-router-dom';
+
+import "./PostDetailText.scss"
 
 const PostDetailText = () => {
-    const { userId } = useParams();
+    const { userId, postId } = useParams();
     const [posts, setPosts] = useState(null);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [dialogStates, setDialogStates] = useState({});
 
     const location = useLocation();
-    const postId = location.state ? location.state.postId : null;
+    //const postId = location.state;
+
+    const navigate = useNavigate();
+    const goTolist = () => {
+        navigate('/notice')
+    }
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -55,7 +62,7 @@ const PostDetailText = () => {
 
         try {
             // postId를 사용하여 deleteDoc 호출
-            await deleteDoc(doc(db, "posts", postId));
+            await deleteDoc(doc(db, "posts", postId));  // 여기서 postId를 인자로 넣어줍니다.
             if (photo) {
                 const photoRef = ref(storage, `posts/${user.uid}/${postId}`)
                 await deleteObject(photoRef);
@@ -66,6 +73,7 @@ const PostDetailText = () => {
             console.error("게시물 삭제 중 에러:", error);
         }
     }
+
 
     const handleBtn = (postId) => {
         console.log("PostId in handleBtn:", postId);
@@ -88,40 +96,44 @@ const PostDetailText = () => {
     }
 
     return (
-        <Block>
-            <>
-                {posts && posts.map(post => (
-                    <li key={user.uid}>
-                        <div className="align">
-                            <Text type={"type1"} text={post.createAt} />
-                            <Text type={"type1"} text={post.username} />
+        <div>
+            <Block>
+                <>
+                    {posts && posts.map(post => (
+                        <div key={user.uid} className="detail__wrapper">
+                            <li>
+                                <div className="align">
+                                    <Text type={"type1"} text={post.createAt} />
+                                    <Text type={"type1"} text={post.username} />
+                                </div>
+
+                                <Heading tag={"h2"} size={"small"} text={post.title} />
+                                <hr />
+                                {post.photo && <img src={post.photo} alt="포스트 이미지" />}
+                                <Text type={"type1"} text={post.textContent} />
+
+                            </li>
+
+                            <div className="btn__align">
+                                <button type="button" className="btn regular primary" onClick={goTolist} >뒤로가기</button>
+                                {user?.uid === post.userId ? (
+                                    <div className="align right btn-box">
+                                        <button onClick={() => onDelete(post.id, post.userId, post.photo)}
+                                            width={"100%"} className="btn regular danger"> 삭제하기 </button>
+                                        <button className="btn regular success" >수정하기 </button>
+                                    </div>
+                                ) : null}
+                            </div>
+
+
+
                         </div>
 
-                        <Heading tag={"h2"} size={"small"} text={post.title} />
-                        <hr />
-                        {post.photo && <img src={post.photo} alt="포스트 이미지" />}
-                        <Text type={"type1"} text={post.textContent} />
+                    ))}
+                </>
+            </Block>
+        </div>
 
-                        {user?.uid === post.userId ? (
-                            <div className="board__more">
-                                <Button className={"btn-more"} onClick={() => handleBtn(post.id)} />
-                                <dialog open={dialogStates[post.id] || false} >
-                                    <ul>
-                                        <li>
-                                            <button>수정</button>
-                                        </li>
-                                        <li>
-                                            <button onClick={() => onDelete(post.id, post.userId, post.photo)}>삭제</button>
-                                        </li>
-                                    </ul>
-                                </dialog>
-                            </div>
-                        ) : null}
-
-                    </li>
-                ))}
-            </>
-        </Block>
     );
 };
 
