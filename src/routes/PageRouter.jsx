@@ -10,7 +10,7 @@ import Layout from "../layout/Layout";
 import MainContent from "../pages/MainContent";
 import AddPost from "../pages/AddPost";
 import PostDetail from "../pages/PostDetail";
-import ProtectedRoute from "../components/PostComponents/protected-route";
+import ProtectedRoute from "./ProtectedRoute";
 import FindPassword from "../pages/FindPassword";
 
 
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         element: <AddPost />
       },
       {
-        path: "/posts/:userId",
+        path: "/posts/:postId",
         element: <PostDetail />,
       },
 

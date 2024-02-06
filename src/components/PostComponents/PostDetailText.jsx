@@ -5,7 +5,6 @@ import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { db } from "../../firebase";
 import Block from "../Common/Block";
 import Heading from "../Common/Heading";
-import { BeatLoader } from "react-spinners";
 import { getAuth } from 'firebase/auth';
 import { ref, deleteObject } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
@@ -17,10 +16,6 @@ const PostDetailText = () => {
     const [posts, setPosts] = useState(null);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
-    const [dialogStates, setDialogStates] = useState({});
-
-    const location = useLocation();
-    //const postId = location.state;
 
     const navigate = useNavigate();
     const goTolist = () => {
@@ -34,7 +29,7 @@ const PostDetailText = () => {
             setUser(currentUser);
 
             try {
-                const postDoc = await getDoc(doc(db, "posts", userId));
+                const postDoc = await getDoc(doc(db, "posts", postId));
 
                 if (postDoc.exists()) {
                     const postData = postDoc.data();
@@ -52,6 +47,7 @@ const PostDetailText = () => {
         };
 
         fetchPosts();
+        // userId, postId가 변경될때마다 함수실행(데이터갱신)
     }, [userId, postId]);
 
     const onDelete = async (postId, userId, photo) => {
@@ -67,11 +63,11 @@ const PostDetailText = () => {
                 const photoRef = ref(storage, `posts/${user.uid}/${postId}`)
                 await deleteObject(photoRef);
             }
-            // 삭제 후 다시 포스트를 가져오기
-            fetchPosts();
+
         } catch (error) {
             console.error("게시물 삭제 중 에러:", error);
         }
+        navigate('/notice')
     }
 
 
@@ -84,11 +80,7 @@ const PostDetailText = () => {
     }
 
     if (loading) {
-        return (
-            <div className="align vm center">
-                <BeatLoader size={15} color="#7366ff" />
-            </div>
-        );
+        return
     }
 
     if (!posts) {
@@ -114,11 +106,12 @@ const PostDetailText = () => {
 
                             </li>
 
+
                             <div className="btn__align">
                                 <button type="button" className="btn regular primary" onClick={goTolist} >뒤로가기</button>
                                 {user?.uid === post.userId ? (
                                     <div className="align right btn-box">
-                                        <button onClick={() => onDelete(post.id, post.userId, post.photo)}
+                                        <button onClick={() => onDelete(postId, post.userId, post.photo)}
                                             width={"100%"} className="btn regular danger"> 삭제하기 </button>
                                         <button className="btn regular success" >수정하기 </button>
                                     </div>
