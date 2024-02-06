@@ -15,7 +15,7 @@ const StatusModal = ({
   initUserJob,
   setStateModalOpen,
   setUserJob,
-  setUserPhone
+  setUserPhone,
 }) => {
 
   const [newUserPhone, setNewUserPhone] = useState(userPhone);

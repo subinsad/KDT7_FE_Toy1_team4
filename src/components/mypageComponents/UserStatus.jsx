@@ -23,17 +23,17 @@ const UserStatus = ({
     <>
       {stateModalOpen ? (
         <StatusModal
-        {...user}
-        userEmail={userEmail}
-        userPhone={userPhone}
-        userJob={userJob}
-        setUserJob={setUserJob}
-        isUserJob={isUserJob}
-        isUserPhone={isUserPhone}
-        initUserPhone={initUserPhone}
-        initUserJob={initUserJob}
-        setStateModalOpen={setStateModalOpen}
-        setUserPhone={setUserPhone}
+          {...user}
+          userEmail={userEmail}
+          userPhone={userPhone}
+          userJob={userJob}
+          setUserJob={setUserJob}
+          isUserJob={isUserJob}
+          isUserPhone={isUserPhone}
+          initUserPhone={initUserPhone}
+          initUserJob={initUserJob}
+          setStateModalOpen={setStateModalOpen}
+          setUserPhone={setUserPhone}
 
         />
       ) : (
