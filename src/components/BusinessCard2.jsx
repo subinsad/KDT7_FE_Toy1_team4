@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "./Common/Profile";
 import Heading from "./Common/Heading";
 import Block from "./Common/Block";
-import "./BusinessCard.scss";
+import "./BusinessCard2.scss";
 import Text from "./Common/Text";
 import MyStatus from "./Common/MyStatus";
 import Button from "./Common/Button";

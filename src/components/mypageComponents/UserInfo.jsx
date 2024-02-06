@@ -1,5 +1,5 @@
 import React from 'react';
-import BusinessCard from '../BusinessCard';
+import BusinessCard from '../BusinessCard2';
 import InfoModal from './Modal/InfoModal';
 import styled from 'styled-components';
 

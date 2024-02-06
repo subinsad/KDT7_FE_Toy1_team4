@@ -1,7 +1,7 @@
 import React from "react";
 import "./MainContent.scss";
 import Board from "../components/Board/Board";
-import BusinessCard from "../components/BusinessCard";
+import BusinessCard from "../components/BusinessCard2";
 import Block from "../components/Common/Block";
 import Heading from "../components/Common/Heading";
 import Button from "../components/Common/Button";
