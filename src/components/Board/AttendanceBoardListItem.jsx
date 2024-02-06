@@ -35,6 +35,8 @@ const AttendanceBoardListItem = ({
       setIsSelect("success");
     } else if (select === "조퇴") {
       setIsSelect("danger");
+    } else if (select === "기타") {
+      setIsSelect("light");
     }
   };
   useEffect(() => {
