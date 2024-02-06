@@ -60,6 +60,16 @@ const StyleGuide = () => {
       <Button className={"btn regular success"} text="btn regular success" />
       <Button className={"btn regular white"} text="btn regular white" />
       <br />
+      <Button className={"btn small primary"} text="btn small primary" />
+      <Button className={"btn small danger"} text="btn small danger" />
+      <Button className={"btn small success"} text="btn small success" />
+      <Button className={"btn small white"} text="btn small white" />
+      <br />
+      <Button className={"btn xsmall primary"} text="btn xsmall primary" />
+      <Button className={"btn xsmall danger"} text="btn xsmall danger" />
+      <Button className={"btn xsmall success"} text="btn xsmall success" />
+      <Button className={"btn xsmall white"} text="btn xsmall white" />
+      <br />
       <Badge situation={"primary"} text={"primary"} />
       <Badge situation={"danger"} text={"danger"} />
       <Badge situation={"success"} text={"success"} />
@@ -139,7 +149,7 @@ const StyleGuide = () => {
 
       <Input width={"20rem"} />
       <br />
-      <Select placeholder={"선택하세요"} options={testOption} onChangeOption={nullOption} />
+      <Select placeholder={"선택하세요"} options={testOption} onChange={nullOption} />
       <br />
       <Textarea width={"100%"} height={"10rem"} />
       <br />
