@@ -1,6 +1,6 @@
 import Text from "../Common/Text";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { db } from "../../firebase";
 import Block from "../Common/Block";
@@ -16,6 +16,9 @@ const PostDetailText = () => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [dialogStates, setDialogStates] = useState({});
+
+    const location = useLocation();
+    const postId = location.state ? location.state.postId : null;
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -42,7 +45,7 @@ const PostDetailText = () => {
         };
 
         fetchPosts();
-    }, [userId]);
+    }, [userId, postId]);
 
     const onDelete = async (postId, userId, photo) => {
         const ok = window.confirm("삭제하시겠습니까?");
@@ -64,15 +67,13 @@ const PostDetailText = () => {
         }
     }
 
-
     const handleBtn = (postId) => {
-        console.log("Handling button click. PostId:", postId);
+        console.log("PostId in handleBtn:", postId);
         setDialogStates((prevState) => ({
             ...prevState,
             [postId]: !prevState[postId]
         }));
     }
-
 
     if (loading) {
         return (
@@ -121,7 +122,6 @@ const PostDetailText = () => {
                 ))}
             </>
         </Block>
-
     );
 };
 

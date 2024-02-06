@@ -12,6 +12,36 @@ export default function PostList() {
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
 
+    // PostList 페이지에서
+    const handleViewPost = (postId) => {
+        navigate(`/posts/${postId}`, { state: { postId } });
+    };
+
+    //페이지네이션
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
+    const itemsPerPage = 5; // 페이지당 항목 수
+
+    // 삭제 등의 작업 후에 목록을 다시 가져오는 함수
+    const fetchPosts = async () => {
+        const postsQuery = query(
+            collection(db, "posts"),
+            orderBy("createAt", "desc")
+        );
+
+        try {
+            const snapshot = await getDocs(postsQuery);
+            const newPosts = snapshot.docs.map(doc => {
+                const { title, textContent, createAt, userId, username, photo } = doc.data();
+                return {
+                    title, textContent, createAt, userId, username, photo, id: doc.id
+                };
+            });
+            setPosts(newPosts);
+        } catch (error) {
+            console.error("게시물 목록 가져오기 중 에러:", error);
+        }
+    };
+
     // 삭제기능
     const onDelete = async (postId, userId, photo) => {
         const ok = confirm("삭제하시겠습니까?")
@@ -43,35 +73,16 @@ export default function PostList() {
         navigate(`/posts/${postId}`);
     };
 
-    // 쿼리등록 (posts에 등록)
-    const fetchPosts = async () => {
-        const postsQuery = query(
-            collection(db, "posts"),
-            orderBy("createAt", "desc")
-        );
-
-        try {
-            const snapshot = await getDocs(postsQuery);
-            const newPosts = snapshot.docs.map(doc => {
-                const { title, textContent, createAt, userId, username, photo } = doc.data();
-                return {
-                    title, textContent, createAt, userId, username, photo, id: doc.id
-                };
-            });
-            setPosts(newPosts);
-        } catch (error) {
-            console.error("게시물 목록 가져오기 중 에러:", error);
-        }
-    };
-
     useEffect(() => {
         fetchPosts();
-    }, []);
+    }, [currentPage]); // 페이지 변경 시에만 fetchPosts 호출
 
     return (
         <div className="list">
             <ul className={"board"} >
-                {posts.map(post => (
+                {/* slice() 메서드를 사용하여 현재 페이지에 해당하는 항목만 추출. 
+            이를 위해 currentPage와 itemsPerPage를 사용하여 시작 인덱스와 끝 인덱스를 계산 */}
+                {posts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map(post => (
                     <li key={post.id}>
                         <a href="" onClick={() => ViewPost(post.id)} >
                             <Profile filename={post.photo} />
@@ -98,7 +109,23 @@ export default function PostList() {
                     </li>
                 ))}
             </ul>
+
+            {/* 페이지네이션 */}
+            <div className="pagination">
+                <button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(prevPage => prevPage - 1)}
+                >
+                    이전 페이지
+                </button>
+                <span>현재 페이지: {currentPage}</span>
+                <button
+                    disabled={posts.length <= itemsPerPage * currentPage}
+                    onClick={() => setCurrentPage(prevPage => prevPage + 1)}
+                >
+                    다음 페이지
+                </button>
+            </div>
         </div>
     );
-
 }
