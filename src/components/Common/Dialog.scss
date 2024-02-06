@@ -9,4 +9,12 @@
   &::backdrop {
     background-color: rgba($black, 0.5);
   }
+  &.alert {
+    min-height: 0;
+  }
+  .align {
+    .btn + .btn {
+      margin-left: 0.7rem;
+    }
+  }
 }

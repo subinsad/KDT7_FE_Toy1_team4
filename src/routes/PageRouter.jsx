@@ -8,12 +8,15 @@ import Login from "../pages/Login";
 import Join from "../pages/Join";
 import Layout from "../layout/Layout";
 import MainContent from "../pages/MainContent";
+<<<<<<< HEAD
 import AddPost from "../pages/AddPost";
 import PostDetail from "../pages/PostDetail";
 import ProtectedRoute from "../components/PostComponents/protected-route";
 import LoginTest from "../components/PostComponents/logintest";
 import FindPassword from "../pages/FindPassword";
 
+=======
+>>>>>>> styleguide
 
 const router = createBrowserRouter([
   {
@@ -25,7 +28,11 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+<<<<<<< HEAD
         path: "main",
+=======
+        path: "home",
+>>>>>>> styleguide
         element: <MainContent />,
       },
       {
