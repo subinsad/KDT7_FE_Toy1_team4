@@ -10,7 +10,7 @@ const Gnb = () => {
     <nav>
       <ul className="gnb">
         <li className="ico1">
-          <Link to="/" className={LocationUrl("/")}>
+          <Link to="/main" className={LocationUrl("/main")}>
             <span>첫페이지</span>
           </Link>
         </li>

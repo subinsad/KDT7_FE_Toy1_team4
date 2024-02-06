@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Button from "../Common/Button";
 import Profile from "../Common/Profile";
 import pic1 from "../../assets/profile1.jpg";
@@ -6,6 +6,8 @@ import { auth } from "../../firebase";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AttendanceBoardView from "./AttendanceBoardView";
+import Badge from "../Common/Badge";
+import "./AttendanceBoardListItem.scss";
 
 const AttendanceBoardListItem = ({
   content,
@@ -18,58 +20,43 @@ const AttendanceBoardListItem = ({
   username,
   id,
 }) => {
-  const navigate = useNavigate();
-  const [isDialog, setIsDialog] = useState(false);
-  const viewProps = {
-    content,
-    createdAt,
-    startdate,
-    enddate,
-    select,
-    title,
-    userId,
-    username,
-    id,
-  };
-  const user = auth.currentUser;
-
+  const [isSelect, setIsSelect] = useState("");
+  const [isToggle, setIsToggle] = useState(false);
   const onInfo = (e) => {
     e.preventDefault();
-    return (
-      <>
-        <AttendanceBoardView {...viewProps} />
-        {navigate("/attendance/view")}
-      </>
-    );
+
+    setIsToggle(!isToggle);
   };
-  const onOption = () => {
-    setIsDialog(!isDialog);
+
+  const onSituation = () => {
+    if (select === "연차") {
+      setIsSelect("primary");
+    } else if (select === "반차") {
+      setIsSelect("success");
+    } else if (select === "조퇴") {
+      setIsSelect("danger");
+    }
   };
+  useEffect(() => {
+    onSituation();
+  }, []);
+
   return (
     <li>
       <a href="" onClick={onInfo}>
         <Profile filename={pic1} />
         <div className="board__status">
-          {startdate} ~ {enddate}
+          <Badge situation={isSelect} text={select} />
         </div>
         <div className="board__title">{title}</div>
         <div className="board__writer">{username}</div>
       </a>
-      {user?.uid === userId && (
-        <div className="board__more">
-          <Button className={"btn-more"} onClick={onOption} />
-          <dialog open={isDialog}>
-            <ul>
-              <li>
-                <button>승인</button>
-              </li>
-              <li>
-                <button>반려</button>
-              </li>
-            </ul>
-          </dialog>
+      <div className={isToggle ? "attend-view --active" : "attend-view"}>
+        <div className="attend-view__date">
+          {startdate} ~ {enddate}
         </div>
-      )}
+        <div className="attend-view__content">{content}</div>
+      </div>
     </li>
   );
 };

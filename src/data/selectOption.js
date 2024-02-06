@@ -44,3 +44,25 @@ export const attendanceOption = [
     text: "기타",
   },
 ];
+export const attendanceViewOption = [
+  {
+    value: "모두",
+    text: "모두보기",
+  },
+  {
+    value: "연차",
+    text: "연차",
+  },
+  {
+    value: "반차",
+    text: "반차",
+  },
+  {
+    value: "조퇴",
+    text: "조퇴",
+  },
+  {
+    value: "기타",
+    text: "기타",
+  },
+];

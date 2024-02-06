@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "../../firebase";
 import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestore";
 import AttendanceBoardListItem from "./AttendanceBoardListItem";
+import Select from "../Form/Select";
+import { attendanceViewOption } from "../../data/selectOption";
 
 const AttendanceBoardList = () => {
   const user = auth.currentUser;
   const [attends, setAttends] = useState([]);
+  const [isSort, setIsSort] = useState("모두");
 
   useEffect(() => {
     const fetchAttend = async () => {
@@ -37,14 +40,27 @@ const AttendanceBoardList = () => {
     };
     fetchAttend();
   }, []);
+
+  const onChange = (e) => {
+    const value = e.target.value;
+    setIsSort(value);
+  };
+  const filteredAttends =
+    isSort === "모두" ? attends : attends.filter((attend) => attend.select === isSort);
+
   return (
-    <div className={"list mt30"}>
-      <ul className={"board"}>
-        {attends.map((attend) => (
-          <AttendanceBoardListItem key={attend.id} {...attend} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="align right">
+        <Select options={attendanceViewOption} onChange={onChange} />
+      </div>
+      <div className={"list mt30"}>
+        <ul className={"board"}>
+          {filteredAttends.map((attend) => (
+            <AttendanceBoardListItem key={attend.id} {...attend} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 
