@@ -111,20 +111,13 @@ export default function PostList() {
             </ul>
 
             {/* 페이지네이션 */}
-            <div className="pagination">
-                <button
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage(prevPage => prevPage - 1)}
-                >
-                    이전 페이지
-                </button>
-                <span>현재 페이지: {currentPage}</span>
-                <button
-                    disabled={posts.length <= itemsPerPage * currentPage}
-                    onClick={() => setCurrentPage(prevPage => prevPage + 1)}
-                >
-                    다음 페이지
-                </button>
+            <div className="align right">
+                <div className="pagination">
+                    <button disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(prevPage => prevPage - 1)}>이전</button>
+                    <button disabled={posts.length <= itemsPerPage * currentPage}
+                        onClick={() => setCurrentPage(prevPage => prevPage + 1)}>다음</button>
+                </div>
             </div>
         </div>
     );
