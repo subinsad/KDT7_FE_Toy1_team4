@@ -2,7 +2,7 @@
 
 .my-status {
   $gap: 5rem;
-  $left: -$gap / 2;
+  $left: calc((-1 * $gap) / 2);
 
   display: flex;
   gap: $gap;
