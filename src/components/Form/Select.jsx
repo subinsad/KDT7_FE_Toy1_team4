@@ -1,9 +1,9 @@
 import React from "react";
 import "./Form.scss";
 
-const Select = ({ placeholder, options, onChangeOption }) => {
+const Select = ({ placeholder, options, ...props }) => {
   return (
-    <select className="select" onChange={(e) => onChangeOption(e.target.value)}>
+    <select className="select" {...props}>
       {placeholder && <option hidden>{placeholder}</option>}
       {options.map(({ value, text }) => (
         <option key={value} value={value}>

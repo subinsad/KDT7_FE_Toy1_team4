@@ -14,10 +14,10 @@ const BusinessCard = () => {
       <Block>
         <Profile filename={pic1} />
         <Heading tag={"h2"} size={"small"} text={"Your Name"} />
-        <Text type={"type1"} text={"@yourShortID"} />
+        <Text type={"type1"} text={"한줄소개"} />
         <MyStatus />
-        <Button className={"btn primary regular"} text="근무시작" />
-        <Button className={"btn success regular"} text="근무중" />
+        {/* <Button className={"btn primary regular"} text="근무시작" />
+        <Button className={"btn success regular"} text="근무중" /> */}
         <Button className={"btn danger regular"} text="근무종료" />
       </Block>
     </div>

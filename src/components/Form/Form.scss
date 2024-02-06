@@ -108,6 +108,14 @@ $checkboxRadio: (
   min-width: 0;
   width: var(--width, auto);
   color: map-get($formSetting, Color);
+  &:disabled {
+    border-color: rgba($formline, 0.4);
+    background-color: rgba($formline, 0.1);
+    cursor: not-allowed;
+  }
+  &::placeholder {
+    color: rgba($gray, 0.6);
+  }
 }
 .textarea {
   @extend %form;
@@ -131,5 +139,23 @@ $checkboxRadio: (
     font-size: 2rem;
     cursor: pointer;
     border-radius: 0.5rem;
+  }
+}
+.date {
+  @include background("ico_date.svg", right 1rem center, $white, 1.4rem auto);
+  @extend %form;
+  min-width: 13rem;
+  padding-right: 3rem;
+  font-family: $f-ko;
+}
+
+.form-type1 {
+  display: grid;
+  gap: 2rem;
+  label {
+    padding: 0.5rem 0 0;
+    margin-bottom: -0.5rem;
+    font-size: 1.4rem;
+    color: $gray;
   }
 }
