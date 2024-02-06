@@ -22,6 +22,7 @@ import ProfileEdit from "../components/Common/ProfileEdit";
 import InputDate from "../components/Form/InputDate";
 import bgMypage from "../assets/bg_mypage.png";
 import BoardGallery from "../components/Board/BoardGallery";
+import Pagination from "../components/Common/Pagination";
 import "./Mypage.scss";
 
 const StyleGuide = () => {
@@ -64,6 +65,15 @@ const StyleGuide = () => {
       <Badge situation={"success"} text={"success"} />
       <Badge situation={"light"} text={"light"} />
       <Badge situation={"dark"} text={"dark"} />
+      <br />
+      <br />
+      <Pagination />
+      <div className="align center">
+        <Pagination />
+      </div>
+      <div className="align right">
+        <Pagination />
+      </div>
 
       <hr />
 
