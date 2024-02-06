@@ -65,4 +65,7 @@ $BadgeColor: (
   &.dark {
     background-color: $black;
   }
+  &.light {
+    background-color: $lightgray;
+  }
 }
