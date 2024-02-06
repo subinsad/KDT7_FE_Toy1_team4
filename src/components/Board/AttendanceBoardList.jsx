@@ -4,6 +4,7 @@ import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestor
 import AttendanceBoardListItem from "./AttendanceBoardListItem";
 import Select from "../Form/Select";
 import { attendanceViewOption } from "../../data/selectOption";
+import "./AttendanceBoardList.scss";
 
 const AttendanceBoardList = () => {
   const user = auth.currentUser;
@@ -50,10 +51,10 @@ const AttendanceBoardList = () => {
 
   return (
     <>
-      <div className="align right">
+      <div className="align right attend-filter">
         <Select options={attendanceViewOption} onChange={onChange} />
       </div>
-      <div className={"list mt30"}>
+      <div className={"list"}>
         <ul className={"board"}>
           {filteredAttends.map((attend) => (
             <AttendanceBoardListItem key={attend.id} {...attend} />
