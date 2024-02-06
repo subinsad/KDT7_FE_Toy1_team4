@@ -62,6 +62,8 @@ const StyleGuide = () => {
       <Badge situation={"primary"} text={"primary"} />
       <Badge situation={"danger"} text={"danger"} />
       <Badge situation={"success"} text={"success"} />
+      <Badge situation={"light"} text={"light"} />
+      <Badge situation={"dark"} text={"dark"} />
 
       <hr />
 
