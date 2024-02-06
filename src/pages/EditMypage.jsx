@@ -133,7 +133,6 @@ const EditMypage = () => {
 
     return (
         <form onSubmit={edit}>
-
             <Block className="form-type1">
                 <Heading tag={"h2"} size={"small"} text={"회원 정보 수정"} />
 

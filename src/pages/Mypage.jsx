@@ -95,6 +95,7 @@ const Mypage = () => {
           shortInfo={shortInfo}
           userImg={userImg}
           userEmail={userEmail}
+          userJob={userJob}
           userBg={userBg}
           userPhone={userPhone}
           workStartTime={workStartTime}

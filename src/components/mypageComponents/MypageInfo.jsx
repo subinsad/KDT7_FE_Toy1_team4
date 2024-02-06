@@ -14,6 +14,7 @@ const MypageInfo = ({
     shortInfo,
     userEmail,
     userPhone,
+    userJob,
     userImg,
     workStartTime,
     workEndTime,
@@ -78,10 +79,18 @@ const MypageInfo = ({
                             <strong>전화번호</strong>
                             {userPhone ? <div>{userPhone}</div> : <div >-</div>}
                         </li>
+                        <li>
+                            <strong>직급</strong>
+                            {userJob ? <div>{userJob}</div> : <div >-</div>}
+                        </li>
                         <li aria-hidden="true"></li>
                         <li>
                             <strong>출근시간</strong>
                             {workStartTime ? <div>{workStartTime}</div> : <div >-</div>}
+                        </li>
+                        <li>
+                            <strong>퇴근시간</strong>
+                            {workEndTime ? <div>{workEndTime}</div> : <div >-</div>}
                         </li>
                         <li>
                             <strong>근태상태</strong>
@@ -131,10 +140,10 @@ const MypageInfo = ({
                             <Dialog openModal={alertModal} closeModal={() => setAlertModal(false)} className={"alert"}>
                                 <div className="txt-center"> 근무를 종료하시겠습니까? </div>
                                 <div className="align center mt20">
-                                    <Button className={"btn regular primary"} text="확인" 
-                                    onClick={() => {
-                                        workEnd()
-                                        setAlertModal(false);
+                                    <Button className={"btn regular primary"} text="확인"
+                                        onClick={() => {
+                                            workEnd()
+                                            setAlertModal(false);
                                         }} />
                                     <Button
                                         className={"btn regular danger"}

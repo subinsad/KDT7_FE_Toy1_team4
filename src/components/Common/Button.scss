@@ -11,10 +11,17 @@ $buttonSize: (
   ),
   2: (
     "class": "small",
-    "fontSize": 1.4rem,
-    "height": 4rem,
+    "fontSize": 1.3rem,
+    "height": 3rem,
     "border": 0.1rem,
-    "padding": 3rem,
+    "padding": 1rem,
+  ),
+  3: (
+    "class": "xsmall",
+    "fontSize": 1.2rem,
+    "height": 2.2rem,
+    "border": 0.1rem,
+    "padding": 0.5rem,
   ),
 );
 $buttonColor: (
@@ -103,5 +110,8 @@ $buttonIcon: (
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+  + .btn {
+    margin-left: 0.5rem;
   }
 }
