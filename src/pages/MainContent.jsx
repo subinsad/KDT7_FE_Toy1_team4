@@ -1,6 +1,5 @@
 import React from "react";
 import "./MainContent.scss";
-import Board from "../components/Board/Board";
 import BusinessCard from "../components/BusinessCard";
 import TimeBlock from "../components/TimeBlock";
 import PersonInfoList from "../components/PersonInfoList";
@@ -17,7 +16,7 @@ const MainContent = () => {
         <Block className="main__attend">
           <div className="align both vm">
             <Heading tag={"h2"} size={"small"} text={"근태현황"} />
-            <Link to="/attendance" className="btn regular success ">
+            <Link to="/attendance" className="btn small success ">
               근태현황 바로가기
             </Link>
           </div>
