@@ -36,6 +36,18 @@ $BadgeColor: (
     "bgColor": $success,
     "color": $success,
   ),
+  4: (
+    "class": "light",
+    "borderColor": $lightgray,
+    "bgColor": $lightgray,
+    "color": $black,
+  ),
+  5: (
+    "class": "dark",
+    "borderColor": $black,
+    "bgColor": $black,
+    "color": $white,
+  ),
 );
 
 .badge {
@@ -49,5 +61,8 @@ $BadgeColor: (
   }
   @for $i from 1 through list.length($BadgeColor) {
     @include BadgeColor(map-get($BadgeColor, $i, class), $i);
+  }
+  &.dark {
+    background-color: $black;
   }
 }
