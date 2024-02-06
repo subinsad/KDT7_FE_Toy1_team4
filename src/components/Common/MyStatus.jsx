@@ -1,5 +1,6 @@
 import React from "react";
 import "./MyStatus.scss";
+import Badge from "./Badge";
 
 const MyStatus = ({timeNow}) => {
   return (
@@ -10,7 +11,9 @@ const MyStatus = ({timeNow}) => {
       </li>
       <li>
         <strong className="my-status__title">현재상태</strong>
-        <div className="my-status__state">근무중</div>
+        <div className="my-status__state">
+          <Badge situation={"success"} text={"근무중"} />
+        </div>
       </li>
     </ul>
   );
