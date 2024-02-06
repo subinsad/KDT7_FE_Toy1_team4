@@ -216,9 +216,17 @@ const StyleGuide = () => {
                 <strong>전화번호</strong>
                 <div>010-1234-1234</div>
               </li>
+              <li>
+                <strong>직급</strong>
+                <div>-</div>
+              </li>
               <li aria-hidden="true"></li>
               <li>
                 <strong>출근시간</strong>
+                <div>09:20</div>
+              </li>
+              <li>
+                <strong>퇴근시간</strong>
                 <div>09:20</div>
               </li>
               <li>

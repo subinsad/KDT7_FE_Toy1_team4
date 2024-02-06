@@ -44,7 +44,7 @@
     > ul {
       display: grid;
       gap: 0 8rem;
-      grid-template-columns: min-content min-content 1fr min-content min-content;
+      grid-template-columns: min-content min-content min-content 1fr min-content min-content min-content;
       white-space: nowrap;
       > li:nth-child(1) {
         strong {
@@ -60,14 +60,28 @@
           }
         }
       }
-      > li:nth-child(4) {
+      > li:nth-child(3) {
+        strong {
+          &::before {
+            content: "\F19B";
+          }
+        }
+      }
+      > li:nth-child(5) {
         strong {
           &::before {
             content: "\F56C";
           }
         }
       }
-      > li:nth-child(5) {
+      > li:nth-child(6) {
+        strong {
+          &::before {
+            content: "\F292";
+          }
+        }
+      }
+      > li:nth-child(7) {
         strong {
           &::before {
             content: "\F41F";
