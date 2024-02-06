@@ -24,7 +24,7 @@ const Attendance = () => {
           </div>
           <Button className={"btn success regular"} text="근태신청" onClick={onWrite} />
         </div>
-        <AttendanceBoardList />
+        <AttendanceBoardList filterShow={true} />
       </Block>
     </>
   );

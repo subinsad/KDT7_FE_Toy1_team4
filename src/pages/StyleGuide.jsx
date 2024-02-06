@@ -139,7 +139,7 @@ const StyleGuide = () => {
 
       <Input width={"20rem"} />
       <br />
-      <Select placeholder={"선택하세요"} options={testOption} onChangeOption={nullOption} />
+      <Select placeholder={"선택하세요"} options={testOption} onChange={nullOption} />
       <br />
       <Textarea width={"100%"} height={"10rem"} />
       <br />

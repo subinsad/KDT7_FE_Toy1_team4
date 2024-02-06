@@ -5,12 +5,24 @@ import BusinessCard from "../components/BusinessCard";
 import TimeBlock from "../components/TimeBlock";
 import PersonInfoList from "../components/PersonInfoList";
 import BoardGallery from "../components/Board/BoardGallery";
+import Block from "../components/Common/Block";
+import AttendanceBoardList from "../components/Board/AttendanceBoardList";
+import Heading from "../components/Common/Heading";
+import { Link } from "react-router-dom";
 
 const MainContent = () => {
   return (
     <div className="main">
       <div className="main-top">
-        <Board type={"list"} headingTag={"h2"} headingText={"근태현황"} />
+        <Block className="main__attend">
+          <div className="align both vm">
+            <Heading tag={"h2"} size={"small"} text={"근태현황"} />
+            <Link to="/attendance" className="btn regular success ">
+              근태현황 바로가기
+            </Link>
+          </div>
+          <AttendanceBoardList filterShow={false} />
+        </Block>
         <div>
           <BusinessCard />
           <div className="mt10">
