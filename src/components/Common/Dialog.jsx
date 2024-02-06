@@ -14,11 +14,16 @@ const Dialog = ({ openModal, closeModal, children, title, className = "" }) => {
     }
   }, [openModal]);
 
+  const handleCloseModal = (e) => {
+    e.preventDefault(); // 폼 제출 방지
+    closeModal();
+  };
+
   return (
     <dialog ref={ref} onCancel={closeModal} className={"dialog " + className}>
       {title && <Heading tag={"h2"} text={title} />}
       {children}
-      <Button onClick={closeModal} className={"btn-close"} />
+      <Button onClick={handleCloseModal} className={"btn-close"} />
     </dialog>
   );
 };

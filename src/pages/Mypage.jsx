@@ -58,7 +58,7 @@ const Mypage = () => {
         }
 
         const today = new Date();
-        const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
+        const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate() }일`;
         const userWorkDocRef = doc(db, 'workingtimeline', user.uid, user.displayName, formattedDate);
         const userWorkDoc = await getDoc(userWorkDocRef);
 
