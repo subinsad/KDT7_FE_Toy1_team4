@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         element: <PostDetail />,
       },
       {
-        path: "/notice/PostUpdate",
+        path: "/posts/:postId/PostUpdate",
         element: <PostUpdate />,
       },
 

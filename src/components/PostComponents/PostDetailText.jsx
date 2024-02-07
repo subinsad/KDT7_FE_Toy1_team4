@@ -21,8 +21,13 @@ const PostDetailText = () => {
     const goBack = () => {
         navigate(-1)
     }
-    const postUpdate = () => {
-        navigate('/notice/PostUpdate')
+    const postUpdate = (post) => {
+        navigate('/posts/:postId/PostUpdate', {
+            state: {
+                post: post,
+                postId: postId
+            }
+        })
     }
 
     useEffect(() => {
@@ -116,7 +121,15 @@ const PostDetailText = () => {
                                     <div className="align right btn-box">
                                         <button onClick={() => onDelete(postId, post.userId, post.photo)}
                                             width={"100%"} className="btn regular danger"> 삭제하기 </button>
-                                        <button className="btn regular success" onClick={postUpdate} >수정하기 </button>
+                                        <button className="btn regular success" onClick={() => { postUpdate(post) }}
+                                            id={post.id}
+                                            userid={post.userId}
+                                            img={post.photo}
+                                            title={post.title}
+                                            username={post.username}
+                                            textcontent={post.textContent}
+
+                                        >수정하기 </button>
                                     </div>
                                 ) : null}
                             </div>

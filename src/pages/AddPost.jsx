@@ -14,7 +14,7 @@ import AddFile from "../components/Form/AddFile";
 
 import "./AddPost.scss"
 
-const AddPost = ({ usernames }) => {
+const AddPost = ({ username }) => {
 
     const navigate = useNavigate();
     const goTolist = () => {
@@ -58,7 +58,7 @@ const AddPost = ({ usernames }) => {
                 title,
                 textContent,
                 createAt: new Date().toLocaleString(),
-                usernames: usernames || "익명",
+                username: username || "익명",
                 userId: user.uid,
 
             });
@@ -103,7 +103,7 @@ const AddPost = ({ usernames }) => {
                     <div className="notice__wrapper__contents">
                         <div className="align">
                             <Text type={"type2"} text={"작성자 : "} />
-                            <Text type={"type1"} text={usernames || "익명"} />
+                            <Text type={"type1"} text={username || "익명"} />
 
                         </div>
 
