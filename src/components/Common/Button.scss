@@ -71,9 +71,21 @@ $buttonIcon: (
     font-family: $f-ico2;
     font-size: 2.5rem;
     color: $gray;
+    @include mobile {
+      font-size: 2.3rem;
+    }
   }
   .header & {
     @include position(a, left, 50%, bottom, 5rem);
+  }
+  @include mobile {
+    &::after {
+      content: "로그아웃";
+      display: block;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      color: $gray;
+    }
   }
 }
 
