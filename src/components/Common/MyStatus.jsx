@@ -2,7 +2,7 @@ import React from "react";
 import "./MyStatus.scss";
 import Badge from "./Badge";
 
-const MyStatus = ({timeNow}) => {
+const MyStatus = ({ timeNow, situation, text }) => {
   return (
     <ul className="my-status">
       <li>
@@ -12,7 +12,7 @@ const MyStatus = ({timeNow}) => {
       <li>
         <strong className="my-status__title">현재상태</strong>
         <div className="my-status__state">
-          <Badge situation={"success"} text={"근무중"} />
+          <Badge situation={situation} text={text} />
         </div>
       </li>
     </ul>

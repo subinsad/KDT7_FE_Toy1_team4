@@ -10,6 +10,7 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom'
 import { updateProfile } from 'firebase/auth'
 import Dialog from '../components/Common/Dialog'
+import Loading from '../components/Common/Loading'
 
 const EditMypage = () => {
     const [name, setName] = useState(""); //사용자 이름 
@@ -23,6 +24,8 @@ const EditMypage = () => {
     //모달에 관한 state
     const [modal, setModal] = useState(false);
     const [alertModal, setAlertModal] = useState(false);
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const user = auth.currentUser;
     const navigate = useNavigate();
@@ -78,6 +81,7 @@ const EditMypage = () => {
 
     const edit = async (e) => {
         e.preventDefault();
+        setIsLoading(true)
         const userDocRef = doc(db, "users", user.uid);
         try {
             if (shortInfo) {
@@ -132,57 +136,61 @@ const EditMypage = () => {
 
 
     return (
-        <form onSubmit={edit}>
-            <Block className="form-type1">
-                <Heading tag={"h2"} size={"small"} text={"회원 정보 수정"} />
+        <>
+            {isLoading ? (<Loading />) :
+                <form onSubmit={edit}>
+                    <Block className="form-type1">
+                        <Heading tag={"h2"} size={"small"} text={"회원 정보 수정"} />
 
-                <label htmlFor="name">Name</label>
-                <Input width={"100%"} id="name" type="text" disabled value={name || ""} />
+                        <label htmlFor="name">Name</label>
+                        <Input width={"100%"} id="name" type="text" disabled value={name || ""} />
 
-                <label htmlFor="email">Email</label>
-                <Input width={"100%"} id="email" type="email" disabled value={userEmail || ""} />
+                        <label htmlFor="email">Email</label>
+                        <Input width={"100%"} id="email" type="email" disabled value={userEmail || ""} />
 
-                <label htmlFor="introduce">한줄소개</label>
-                <Input width={"100%"} id="introduce" type="text" placehodler="한줄소개를 입력해주세요."
-                    value={shortInfo || ""} onChange={handleShortInfo} required />
+                        <label htmlFor="introduce">한줄소개</label>
+                        <Input width={"100%"} id="introduce" type="text" placehodler="한줄소개를 입력해주세요."
+                            value={shortInfo || ""} onChange={handleShortInfo} required />
 
-                <label htmlFor="tel">전화번호</label>
-                <Input width={"100%"} id="tel" type="tel" placeholder="숫자만 입력해주세요."
-                    value={userPhone || ""} onChange={handlePhone} required />
+                        <label htmlFor="tel">전화번호</label>
+                        <Input width={"100%"} id="tel" type="tel" placeholder="숫자만 입력해주세요."
+                            value={userPhone || ""} onChange={handlePhone} required />
 
-                <label htmlFor="job">직급</label>
-                <Input width={"100%"} id="job" type="text" placeholder="직급을 입력해주세요."
-                    value={userJob || ""} onChange={handleJob} required />
+                        <label htmlFor="job">직급</label>
+                        <Input width={"100%"} id="job" type="text" placeholder="직급을 입력해주세요."
+                            value={userJob || ""} onChange={handleJob} required />
 
-                <label htmlFor="">프로필사진</label>
-                <AddFile id={"file2_1"} text={userImgFile ? "파일이 추가되었습니다" : "첨부파일"} onChange={userImgChange} />
+                        <label htmlFor="">프로필사진</label>
+                        <AddFile id={"file2_1"} text={userImgFile ? "파일이 추가되었습니다" : "첨부파일"} onChange={userImgChange} />
 
-                <label htmlFor="">배경사진</label>
-                <AddFile id={"file2_2"} text={userBgFile ? "파일이 추가되었습니다" : "첨부파일"} onChange={userBgChange} />
+                        <label htmlFor="">배경사진</label>
+                        <AddFile id={"file2_2"} text={userBgFile ? "파일이 추가되었습니다" : "첨부파일"} onChange={userBgChange} />
 
-                <div className="align center">
-                    <Button className={"btn regular primary"} text="회원정보수정" type="button"
-                        onClick={() => {
-                            setAlertModal(true);
-                        }} />
-                </div>
+                        <div className="align center">
+                            <Button className={"btn regular primary"} text="회원정보수정" type="button"
+                                onClick={() => {
+                                    setAlertModal(true);
+                                }} />
+                        </div>
 
-                <Dialog openModal={alertModal} closeModal={() => setAlertModal(false)} className={"alert"}>
-                    <div className="txt-center"> 회원 정보를 수정 하시겠습니까? </div>
-                    <div className="align center mt20">
-                        <Button className={"btn regular primary"} text="확인" type="submit" onClick={checkType} />
-                        <Button
-                            className={"btn regular danger"}
-                            text="취소"
-                            type="button"
-                            onClick={() => {
-                                setAlertModal(false);
-                            }}
-                        />
-                    </div>
-                </Dialog>
-            </Block>
-        </form>
+                        <Dialog openModal={alertModal} closeModal={() => setAlertModal(false)} className={"alert"}>
+                            <div className="txt-center"> 회원 정보를 수정 하시겠습니까? </div>
+                            <div className="align center mt20">
+                                <Button className={"btn regular primary"} text="확인" type="submit" onClick={checkType} />
+                                <Button
+                                    className={"btn regular danger"}
+                                    text="취소"
+                                    type="button"
+                                    onClick={() => {
+                                        setAlertModal(false);
+                                    }}
+                                />
+                            </div>
+                        </Dialog>
+                    </Block>
+                </form>}
+
+        </>
     )
 }
 

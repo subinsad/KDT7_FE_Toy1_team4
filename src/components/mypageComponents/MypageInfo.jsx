@@ -7,6 +7,7 @@ import Button from '../Common/Button'
 import { doc, setDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
 import Dialog from '../Common/Dialog'
+import bgMypage from "../../assets/bg_mypage.png";
 
 const MypageInfo = ({
     user,
@@ -59,7 +60,7 @@ const MypageInfo = ({
     return (
         <Block className="mypage__wrapper">
             <div className="mypage__bg">
-                <img src={userBg} alt="" />
+                <img src={userBg || bgMypage} alt="" />
             </div>
             <div className="mypage__inner">
                 <div className="mypage__profile">
