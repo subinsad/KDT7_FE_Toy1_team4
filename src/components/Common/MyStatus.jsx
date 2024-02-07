@@ -2,12 +2,12 @@ import React from "react";
 import "./MyStatus.scss";
 import Badge from "./Badge";
 
-const MyStatus = () => {
+const MyStatus = ({timeNow}) => {
   return (
     <ul className="my-status">
       <li>
         <strong className="my-status__title">현재시간</strong>
-        <div className="my-status__time">23:11:20</div>
+        <div className="my-status__time">{timeNow}</div>
       </li>
       <li>
         <strong className="my-status__title">현재상태</strong>

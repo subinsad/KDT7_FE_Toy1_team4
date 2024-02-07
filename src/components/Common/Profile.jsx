@@ -1,12 +1,14 @@
 import React from "react";
 import "./Profile.scss";
+import styled from "styled-components";
 
-const Profile = ({ filename, className = "" }) => {
+const Profile = ({ userImg, className = "" }) => {
   return (
     <div className={"profile " + className}>
-      <img src={filename} alt="" />
+      <img src={userImg} alt="" /> 
     </div>
   );
 };
 
 export default Profile;
+

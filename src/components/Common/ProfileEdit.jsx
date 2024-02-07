@@ -1,10 +1,12 @@
 import React from "react";
 import "./Profile.scss";
+import { useNavigate } from 'react-router-dom'
 
 const ProfileEdit = ({ children }) => {
+  const navigate = useNavigate();
   return (
     <div className="profile-edit">
-      <button aria-label="프로필수정">
+      <button aria-label="프로필수정" onClick={()=>{navigate('/editmypage');}}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"

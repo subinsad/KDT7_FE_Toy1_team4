@@ -4,7 +4,7 @@ import Block from "../components/Common/Block";
 import Board from "../components/Board/Board";
 import Profile from "../components/Common/Profile";
 import pic1 from "../assets/profile1.jpg";
-import BusinessCard from "../components/BusinessCard";
+import BusinessCard from "../components/BusinessCard2";
 import Text from "../components/Common/Text";
 import Dialog from "../components/Common/Dialog";
 import Button from "../components/Common/Button";
