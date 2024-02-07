@@ -6,12 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { deleteObject, ref } from "firebase/storage";
 import React from "react";
 
-import Profile from "../Common/Profile";
 import profileDefault from "../../assets/profile_default.png";
 import Block from "../Common/Block";
-import Button from "../Common/Button";
 
-export default function BoardGallery() {
+export default function BoardGallery({ pagination }) {
     const user = auth.currentUser;
     const [dialogStates, setDialogStates] = useState({});
     const navigate = useNavigate();
@@ -24,7 +22,7 @@ export default function BoardGallery() {
 
     //페이지네이션
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
-    const itemsPerPage = 6; // 페이지당 항목 수
+    const itemsPerPage = 4; // 페이지당 항목 수
 
     // 삭제 등의 작업 후에 목록을 다시 가져오는 함수
     const fetchPosts = async () => {
@@ -98,14 +96,16 @@ export default function BoardGallery() {
             </ul>
 
             {/* 페이지네이션 */}
-            <div className="align right">
-                <div className="pagination">
-                    <button disabled={currentPage === 1}
-                        onClick={() => setCurrentPage(prevPage => prevPage - 1)}>이전</button>
-                    <button disabled={posts.length <= itemsPerPage * currentPage}
-                        onClick={() => setCurrentPage(prevPage => prevPage + 1)}>다음</button>
+            {pagination && (
+                <div className="align right">
+                    <div className="pagination">
+                        <button disabled={currentPage === 1}
+                            onClick={() => setCurrentPage(prevPage => prevPage - 1)}>이전</button>
+                        <button disabled={posts.length <= itemsPerPage * currentPage}
+                            onClick={() => setCurrentPage(prevPage => prevPage + 1)}>다음</button>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

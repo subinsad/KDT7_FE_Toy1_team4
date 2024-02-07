@@ -22,7 +22,7 @@ const Notice = () => {
                     <h2 className="heading small">기업 공지 모음</h2>
                     <button className="btn regular primary " onClick={goToAddPost}>글 등록</button>
                 </div>
-                <BoardGallery />
+                <BoardGallery pagination={true} />
             </Block>
         </div>
 

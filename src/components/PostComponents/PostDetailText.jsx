@@ -104,15 +104,21 @@ const PostDetailText = () => {
                     {posts && posts.map(post => (
                         <div key={user.uid} className="detail__wrapper">
                             <li>
-                                <div className="align">
+
+                                <Heading tag={"h2"} size={"small"} text={post.title} />
+
+                                <div className="align mt10">
                                     <Text type={"type1"} text={post.createAt} />
                                     <Text type={"type1"} text={post.username} />
                                 </div>
 
-                                <Heading tag={"h2"} size={"small"} text={post.title} />
                                 <hr />
-                                {post.photo && <img src={post.photo} alt="포스트 이미지" />}
-                                <Text type={"type1"} text={post.textContent} />
+                                {post.photo && <img src={post.photo} alt="포스트 이미지" style={{ maxWidth: "500px" }} />}
+                                <div className="mt20">
+                                    <Text type={"type1"} text={post.textContent} />
+                                </div>
+
+
 
                             </li>
 

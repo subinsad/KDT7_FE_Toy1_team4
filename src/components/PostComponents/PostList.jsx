@@ -88,7 +88,7 @@ export default function PostList() {
                             <Profile filename={post.photo} />
                             <div className="board__status">{post.createAt}</div>
                             <div className="board__title">{post.title}</div>
-                            <div className="board__writer">{post.username}</div>
+                            <div className="board__writer">{username}</div>
                         </a>
 
                         {user?.uid === post.userId ? (

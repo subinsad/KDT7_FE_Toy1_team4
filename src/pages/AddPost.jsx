@@ -58,7 +58,7 @@ const AddPost = ({ username }) => {
                 title,
                 textContent,
                 createAt: new Date().toLocaleString(),
-                username: username || "익명",
+                username: user.displayName,
                 userId: user.uid,
 
             });
@@ -101,11 +101,6 @@ const AddPost = ({ username }) => {
 
                 <form onSubmit={onSubmit}>
                     <div className="notice__wrapper__contents">
-                        <div className="align">
-                            <Text type={"type2"} text={"작성자 : "} />
-                            <Text type={"type1"} text={username || "익명"} />
-
-                        </div>
 
                         <div className="file">
                             <Text className="align center" type={"type2"} text={"첨부파일 : "} />

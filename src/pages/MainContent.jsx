@@ -3,7 +3,7 @@ import "./MainContent.scss";
 import BusinessCard from "../components/BusinessCard";
 import TimeBlock from "../components/TimeBlock";
 import PersonInfoList from "../components/PersonInfoList";
-import BoardGallery from "../components/Board/BoardGallery";
+import BoardGallery from "../components/PostComponents/BoardGallery";
 import Block from "../components/Common/Block";
 import AttendanceBoardList from "../components/Board/AttendanceBoardList";
 import Heading from "../components/Common/Heading";
@@ -109,7 +109,7 @@ const MainContent = () => {
         ) : <TimeBlock time={" - "} title={"근무시간"} icon={"ico4"} />}
       </div>
 
-      <BoardGallery />
+      <BoardGallery pagination={false} />
     </div>
   );
 };
