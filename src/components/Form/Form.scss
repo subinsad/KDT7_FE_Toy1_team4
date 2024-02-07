@@ -139,6 +139,9 @@ $checkboxRadio: (
     font-size: 2rem;
     cursor: pointer;
     border-radius: 0.5rem;
+    @include mobile {
+      height: 5rem;
+    }
   }
 }
 .date {
@@ -152,6 +155,9 @@ $checkboxRadio: (
 .form-type1 {
   display: grid;
   gap: 2rem;
+  @include mobile {
+    gap: 1rem;
+  }
   label {
     padding: 0.5rem 0 0;
     margin-bottom: -0.5rem;

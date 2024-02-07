@@ -11,7 +11,7 @@ import Button from "../components/Common/Button";
 import Badge from "../components/Common/Badge";
 import Input from "../components/Form/Input";
 import Select from "../components/Form/Select";
-import { testOption, tel } from "../data/selectOption";
+import { testOption } from "../data/selectOption";
 import Textarea from "../components/Form/Textarea";
 import Checkbox from "../components/Form/Checkbox";
 import PersonInfoList from "../components/PersonInfoList";
@@ -20,10 +20,11 @@ import Radio from "../components/Form/Radio";
 import AddFile from "../components/Form/AddFile";
 import ProfileEdit from "../components/Common/ProfileEdit";
 import InputDate from "../components/Form/InputDate";
-import "./Mypage.scss";
 import bgMypage from "../assets/bg_mypage.png";
 import BoardGallery from "../components/Board/BoardGallery";
 import Pagination from "../components/Common/Pagination";
+import "./Mypage.scss";
+
 
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);
@@ -59,6 +60,16 @@ const StyleGuide = () => {
       <Button className={"btn regular danger"} text="btn regular danger" />
       <Button className={"btn regular success"} text="btn regular success" />
       <Button className={"btn regular white"} text="btn regular white" />
+      <br />
+      <Button className={"btn small primary"} text="btn small primary" />
+      <Button className={"btn small danger"} text="btn small danger" />
+      <Button className={"btn small success"} text="btn small success" />
+      <Button className={"btn small white"} text="btn small white" />
+      <br />
+      <Button className={"btn xsmall primary"} text="btn xsmall primary" />
+      <Button className={"btn xsmall danger"} text="btn xsmall danger" />
+      <Button className={"btn xsmall success"} text="btn xsmall success" />
+      <Button className={"btn xsmall white"} text="btn xsmall white" />
       <br />
       <Badge situation={"primary"} text={"primary"} />
       <Badge situation={"danger"} text={"danger"} />
@@ -139,7 +150,7 @@ const StyleGuide = () => {
 
       <Input width={"20rem"} />
       <br />
-      <Select placeholder={"선택하세요"} options={testOption} onChangeOption={nullOption} />
+      <Select placeholder={"선택하세요"} options={testOption} onChange={nullOption} />
       <br />
       <Textarea width={"100%"} height={"10rem"} />
       <br />
@@ -206,9 +217,17 @@ const StyleGuide = () => {
                 <strong>전화번호</strong>
                 <div>010-1234-1234</div>
               </li>
+              <li>
+                <strong>직급</strong>
+                <div>-</div>
+              </li>
               <li aria-hidden="true"></li>
               <li>
                 <strong>출근시간</strong>
+                <div>09:20</div>
+              </li>
+              <li>
+                <strong>퇴근시간</strong>
                 <div>09:20</div>
               </li>
               <li>
