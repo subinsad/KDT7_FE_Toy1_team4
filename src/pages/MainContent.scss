@@ -26,3 +26,15 @@
     }
   }
 }
+.main__attend {
+  > .align {
+    margin-bottom: 3rem;
+    .btn {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .board a {
+    pointer-events: none;
+  }
+}
