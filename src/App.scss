@@ -1,16 +1,26 @@
 @import "./scss/base.scss";
 body {
-  height: 100vh;
   background: radial-gradient(rgba($primary, 0.9), rgba($primary, 0.2));
+  @include mobile {
+    background: $lightgray;
+  }
 }
 .containers {
-  @include position(f, left, 50%, top, 50%);
+  $space: 10rem;
   display: grid;
   grid-template-columns: min-content 1fr;
   border-radius: 3rem;
   overflow: hidden;
-  width: 85vw;
-  height: 80vh;
+  width: calc(100% - $space * 2);
+  height: calc(100vh - $space * 2);
+  margin: $space;
   background-color: $white;
   font-size: 1.6rem;
+  @include mobile {
+    grid-template-columns: 1fr;
+    width: auto;
+    height: auto;
+    margin: 0 0 0 8rem;
+    border-radius: 0;
+  }
 }

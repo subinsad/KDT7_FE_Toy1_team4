@@ -38,6 +38,9 @@ $Gnb: (
   display: grid;
   gap: 2rem;
   padding: 5rem 0 0;
+  @include mobile {
+    width: 8rem;
+  }
   a {
     display: flex;
     justify-content: center;
@@ -50,6 +53,13 @@ $Gnb: (
     transition: 0.3s;
     text-align: center;
     outline: none;
+    @include mobile {
+      font-size: 2.3rem;
+      width: 100%;
+      padding: 1rem 0.5rem;
+      box-sizing: border-box;
+    }
+    &.--active,
     &:focus,
     &:hover {
       color: $primary;
@@ -59,6 +69,9 @@ $Gnb: (
         height: 100%;
         width: 0.5rem;
         background-color: $primary;
+        @include mobile {
+          width: 0.3rem;
+        }
       }
     }
   }

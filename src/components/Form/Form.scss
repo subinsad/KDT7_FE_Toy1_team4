@@ -32,23 +32,16 @@ $checkboxRadio: (
   1: (
     "class": "check-type1",
     "offImg": "ico_check_off.svg",
-    "onImg": "ico_check_on.svg",
+    "onImg": "ico_check_on2.svg",
     "width": 1.9rem,
     "height": 1.9rem,
   ),
   2: (
     "class": "radio-type1",
-    "offImg": "ico_check_off.svg",
-    "onImg": "ico_check2_on.svg",
-    "width": 1.8rem,
-    "height": 1.8rem,
-  ),
-  3: (
-    "class": "radio-type1",
-    "offImg": "ico_check_off.svg",
-    "onImg": "ico_check2_on.svg",
-    "width": 1.8rem,
-    "height": 1.8rem,
+    "offImg": "ico_radio_off.svg",
+    "onImg": "ico_radio_on.svg",
+    "width": 1.9rem,
+    "height": 1.9rem,
   ),
 );
 
@@ -115,6 +108,14 @@ $checkboxRadio: (
   min-width: 0;
   width: var(--width, auto);
   color: map-get($formSetting, Color);
+  &:disabled {
+    border-color: rgba($formline, 0.4);
+    background-color: rgba($formline, 0.1);
+    cursor: not-allowed;
+  }
+  &::placeholder {
+    color: rgba($gray, 0.6);
+  }
 }
 .textarea {
   @extend %form;
@@ -122,4 +123,45 @@ $checkboxRadio: (
   padding-bottom: 1rem;
   width: var(--width);
   height: var(--height);
+}
+
+.addfile {
+  @include a11y-hidden;
+  + label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8rem;
+    border: 0.2rem dashed $primary;
+    color: $primary;
+    background-color: rgba($primary, 0.2);
+    font-weight: 600;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    @include mobile {
+      height: 5rem;
+    }
+  }
+}
+.date {
+  @include background("ico_date.svg", right 1rem center, $white, 1.4rem auto);
+  @extend %form;
+  min-width: 13rem;
+  padding-right: 3rem;
+  font-family: $f-ko;
+}
+
+.form-type1 {
+  display: grid;
+  gap: 2rem;
+  @include mobile {
+    gap: 1rem;
+  }
+  label {
+    padding: 0.5rem 0 0;
+    margin-bottom: -0.5rem;
+    font-size: 1.4rem;
+    color: $gray;
+  }
 }
