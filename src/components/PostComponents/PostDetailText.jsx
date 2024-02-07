@@ -8,6 +8,8 @@ import Heading from "../Common/Heading";
 import { getAuth } from 'firebase/auth';
 import { ref, deleteObject } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
+import { storage } from "../../firebase";
+
 
 import "./PostDetailText.scss"
 
