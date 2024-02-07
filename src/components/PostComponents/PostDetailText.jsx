@@ -18,8 +18,11 @@ const PostDetailText = () => {
     const [user, setUser] = useState(null);
 
     const navigate = useNavigate();
-    const goTolist = () => {
-        navigate('/notice')
+    const goBack = () => {
+        navigate(-1)
+    }
+    const postUpdate = () => {
+        navigate('/notice/PostUpdate')
     }
 
     useEffect(() => {
@@ -108,12 +111,12 @@ const PostDetailText = () => {
 
 
                             <div className="btn__align">
-                                <button type="button" className="btn regular primary" onClick={goTolist} >뒤로가기</button>
+                                <button type="button" className="btn regular primary" onClick={goBack} >뒤로가기</button>
                                 {user?.uid === post.userId ? (
                                     <div className="align right btn-box">
                                         <button onClick={() => onDelete(postId, post.userId, post.photo)}
                                             width={"100%"} className="btn regular danger"> 삭제하기 </button>
-                                        <button className="btn regular success" >수정하기 </button>
+                                        <button className="btn regular success" onClick={postUpdate} >수정하기 </button>
                                     </div>
                                 ) : null}
                             </div>

@@ -19,7 +19,7 @@ const PostBoard = ({ type, headingTag, headingText }) => {
 
   const goToAddPost = () => {
     // navigate 함수를 사용하여 경로를 변경
-    navigate('/AddPost');
+    navigate('/notice/AddPost');
   };
 
   return (

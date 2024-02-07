@@ -1,18 +1,18 @@
+import { addDoc, collection, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import { getDoc, doc } from "firebase/firestore";
+import { db, auth, storage } from "../firebase";
+import { useNavigate } from 'react-router-dom';
+
 import React, { useState } from "react";
 import Block from "../components/Common/Block";
 import Heading from "../components/Common/Heading";
 import Text from "../components/Common/Text";
 import Input from "../components/Form/Input";
 import Textarea from "../components/Form/Textarea";
-import "./AddPost.scss"
-import { addDoc, collection, updateDoc } from "firebase/firestore";
-import { getDoc, doc } from "firebase/firestore";
-import { db, auth, storage } from "../firebase";
 import AddFile from "../components/Form/AddFile";
-import { useNavigate } from 'react-router-dom';
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 
-
+import "./AddPost.scss"
 
 const AddPost = ({ usernames }) => {
 
@@ -123,12 +123,12 @@ const AddPost = ({ usernames }) => {
 
                         <AddFile id={"file"} file={file} />
 
-                        <div className="align right btn-box">
-                            <Input width={"100%"} type="submit" className="btn regular primary"
-                                value={isLoading ? "Loading" : "Post"} onClick={onSubmit}
-                            />
-                            {/* 뒤로가기 색상추가 고려(회색) */}
+                        <div className="align center">
                             <button type="button" className="btn regular danger" onClick={goTolist} >뒤로가기</button>
+                            <Input width={"100%"} type="submit" className="btn regular primary"
+                                value={isLoading ? "로딩중" : "글쓰기"} onClick={onSubmit}
+                            />
+
                         </div>
 
                     </div>

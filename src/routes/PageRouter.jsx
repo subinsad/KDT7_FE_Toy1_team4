@@ -12,6 +12,7 @@ import AddPost from "../pages/AddPost";
 import PostDetail from "../pages/PostDetail";
 import ProtectedRoute from "./ProtectedRoute";
 import FindPassword from "../pages/FindPassword";
+import PostUpdate from '../components/PostComponents/PostUpdate';
 
 
 const router = createBrowserRouter([
@@ -44,12 +45,16 @@ const router = createBrowserRouter([
         element: <StyleGuide />,
       },
       {
-        path: "/AddPost",
+        path: "/notice/AddPost",
         element: <AddPost />
       },
       {
         path: "/posts/:postId",
         element: <PostDetail />,
+      },
+      {
+        path: "/notice/PostUpdate",
+        element: <PostUpdate />,
       },
 
     ],
