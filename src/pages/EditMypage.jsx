@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { updateProfile } from 'firebase/auth'
 import Dialog from '../components/Common/Dialog'
 import Loading from '../components/Common/Loading'
+import './EditMypage.scss'
 
 const EditMypage = () => {
     const [name, setName] = useState(""); //사용자 이름 
@@ -21,7 +22,7 @@ const EditMypage = () => {
     const [userImgFile, setUserImgFile] = useState(null)
     const [userBgFile, setUserBgFile] = useState(null)
 
-    //모달에 관한 state
+    //모달에 관한 state`
     const [modal, setModal] = useState(false);
     const [alertModal, setAlertModal] = useState(false);
 
@@ -137,7 +138,7 @@ const EditMypage = () => {
 
     return (
         <>
-            {isLoading ? (<Loading />) :
+            {isLoading ? (<div className='fixed'><Loading /></div>) :
                 <form onSubmit={edit}>
                     <Block className="form-type1">
                         <Heading tag={"h2"} size={"small"} text={"회원 정보 수정"} />
