@@ -35,7 +35,8 @@
       width: 5rem;
       height: 5rem;
     }
-    &:not([src]) {
+    &:not([src]),
+    &[src=""] {
       opacity: 0;
     }
   }

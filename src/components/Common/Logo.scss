@@ -1,7 +1,10 @@
 @import "../../scss/base.scss";
 .logo {
-  display: inline-flex;
-  padding: 1rem;
-  border-radius: 100%;
-  background: rgba($primary, 0.2);
+  text-align: center;
+  display: grid;
+  justify-content: center;
+  img {
+    width: auto;
+    justify-self: center;
+  }
 }
