@@ -2,7 +2,8 @@
 - ```FourUnity``` : 4조가 하나로 ```통합```되어 함께 일한다라는 의미를 담고있는 인트라넷 페이지
 - 직원들을 위한 인트라넷 페이지
 - 직원들의 근무 관리를 위한 여러 기능이 있습니다.
-
+- 배포링크 : https://fourunity.netlify.app/
+- 가입 후 들어가면 됩니다.
   
 ## 📚프로젝트 소개
 제작기간 : 2024.01.26 ~ 2024.02.08 <br>
@@ -17,11 +18,12 @@
 ## 👩‍💻팀원 소개
 
 
+
 | 박수빈  |  하성필   |  방호진   |
 | :------------: | :------------: |:------------: | 
 | [ParkSuBin ](https://github.com/subinsad)  |  [HaSungPil](https://github.com/hasungpil)  |  [BangHoJin](https://github.com/banghogu)  |  
-|  <img width="150" src="https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/26134b36-e51d-457d-abae-99d56037d44b"/> | ![image](https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/c9791652-c9cd-49f6-922f-7d271acdb678)  | ![image](https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/c9791652-c9cd-49f6-922f-7d271acdb678) |
-| 기업 공지 모음 갤러리 페이지(글 조회, 등록, 삭제), 페이지네이션, 배포, 알고리즘 설계   |  로그인(회원가입,비밀번호찾기), 스타일가이드(반응형), 부재 신청 페이지(데이터 필터링, 등록,조회), 로딩애니메이션  |  마이페이지 (프로필수정,조회), 시간관리모달(근무시작,종료) 알고리즘 설계  |  
+|  <img width="150" src="https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/26134b36-e51d-457d-abae-99d56037d44b"/> |  <img width ="300" src="https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/c9791652-c9cd-49f6-922f-7d271acdb678" >  | <img width="150" src="https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/e0a4d495-b9f2-462a-8c42-58dd29917650"> |
+| 기업 공지 모음 갤러리 페이지(글 조회, 등록, 삭제), 페이지네이션, 배포, 알고리즘 설계   |  로그인(회원가입,비밀번호찾기), 스타일가이드(반응형), 부재 신청 페이지(데이터 필터링, 등록,조회), 로딩애니메이션  |  마이페이지 (프로필수정,조회), 시간관리모달(근무시작,종료) 알고리즘 설계  |
 
 ## 🎁 기술 스택  
 <div align="left">
