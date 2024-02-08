@@ -1,15 +1,9 @@
 import React from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
-import { auth } from "../firebase";
 
 const Layout = () => {
-  const navigate = useNavigate();
-  const user = auth.currentUser;
-  if (!user) {
-    return navigate("/login");
-  }
 
   return (
     <>
