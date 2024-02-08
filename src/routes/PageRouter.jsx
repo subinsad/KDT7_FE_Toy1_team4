@@ -76,5 +76,9 @@ const router = createBrowserRouter([
     path: "/join",
     element: <Join />,
   },
+  {
+    path: "/findpassword",
+    element: <FindPassword />,
+  },
 ]);
 export default router;
