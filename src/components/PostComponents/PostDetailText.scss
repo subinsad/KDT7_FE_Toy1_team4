@@ -9,6 +9,14 @@
         gap: 2rem;
     }
 
+    .textContent{
+        white-space: pre-wrap;
+        word-spacing: 0.5rem;
+        line-height: 2rem;
+    }
+
+    
+
     .btn__align{
         display: flex;
         justify-content: space-between;

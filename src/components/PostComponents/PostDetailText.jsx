@@ -114,8 +114,8 @@ const PostDetailText = () => {
 
                                 <hr />
                                 {post.photo && <img src={post.photo} alt="포스트 이미지" style={{ maxWidth: "500px" }} />}
-                                <div className="mt20">
-                                    <Text type={"type1"} text={post.textContent} />
+                                <div className="textContent mt20">
+                                    <Text type={"type1"} className="textContent" text={post.textContent} />
                                 </div>
 
 
