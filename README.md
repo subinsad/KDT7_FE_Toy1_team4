@@ -53,7 +53,7 @@
   |   <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/d9a754c4-48d2-4ec6-9695-96a14aa5ce84" />     | <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/d40e3210-3ddc-4425-b5fd-614d6e7d178a)https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/d40e3210-3ddc-4425-b5fd-614d6e7d178a" /> 
  ## ✨세부 기능 설명
 
- ### 로그인 
+ ### 1️⃣ 로그인 
 
 - ```하성필``` 담당
 - 회원가입 후 로그인이 가능합니다.
@@ -64,7 +64,7 @@
 |   <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/73f8ab03-eaa3-4dbd-9f67-6bb1ba93a953" />     | <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/dea5a5fc-6fdf-4ee6-9d43-c961f61ab89c" />     | <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/0d261553-32ec-4b28-a0c8-0959b50a8b50" /> 
 
 
-### 메인페이지
+### 2️⃣ 메인페이지
 
 - 각자 구현한 부분 조합
 - ```근태현황```을 볼 수 있고, 근태현황 페이지로 넘어가는 버튼이 있습니다.
@@ -80,7 +80,7 @@
 |   <img width="500" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/77ec20af-0ef0-4b8a-af10-59d207025adf" />     | <img width="500" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/d9f8145f-8157-4acd-8c31-1d6d72507f53" />     | 
 
 
- ### 근태페이지
+ ### 3️⃣ 근태페이지
 
 - ```하성필``` 담당
 - 전 직원 근태상황을 볼 수있는 ```리스트페이지``` 입니다.
@@ -96,7 +96,7 @@
 
 
 
- ### 기업공지갤러리
+ ### 4️⃣ 기업공지갤러리
 
 - ``` 박수빈 ``` 담당
 - 기업공지를 볼 수있는 ```갤러리페이지``` 입니다.
@@ -111,7 +111,7 @@
 | ![REC-20240208033151-ezgif com-video-to-gif-converter](https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/7b823834-c769-407c-a0c3-027768029078) | ![REC-20240208033005-ezgif com-video-to-gif-converter](https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/e32fb735-6c35-4065-a771-4f68af09230e) |
 
 
- ### 마이페이지
+ ### 5️⃣ 마이페이지
 
  - ``` 방호진 ``` 담당
  - 로그인/회원가입한 정보가 ```마이페이지```로 들어갑니다.
@@ -130,7 +130,7 @@
 
 
 
-### 반응형
+### 6️⃣ 반응형
 
 - ```하성필``` 담당
 
