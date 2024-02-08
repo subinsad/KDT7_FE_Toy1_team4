@@ -17,7 +17,7 @@
 
 | 박수빈  |  하성필   |  방호진   |
 | :------------: | :------------: |:------------: | 
-| [ParkSuBin ](https://github.com/subinsad)  |  [HaSungPil](https://github.com/hasungpil)  |  BangHoJin  |  
+| [ParkSuBin ](https://github.com/subinsad)  |  [HaSungPil](https://github.com/hasungpil)  |  [BangHoJin](https://github.com/banghogu)  |  
 |  <img width="150" src="https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/26134b36-e51d-457d-abae-99d56037d44b"/> |  로그인, 스타일가이드, 부재 신청 페이지 | 마이페이지 구현 |
 | 기업 공지 모음 갤러리 페이지(글 등록, 삭제), 배포, 알고리즘 설계   |  로그인, 스타일가이드, 부재 신청 페이지(데이터 필터링  |  마이페이지 (프로필,프로필 수정, 시간 관리 모달), 알고리즘 설계  |  
 |
