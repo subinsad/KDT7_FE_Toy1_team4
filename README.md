@@ -139,7 +139,7 @@
 - ```하성필``` 담당
 
 
-|  태블릿 |  정보수정  |
+|  태블릿 |  휴대폰  |
 | :------------: | :------------: |
 |   <img width="550" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/3f891d1b-441f-48d8-b0b7-f1fe53cd5032" />     |  <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/acbcbaf7-b675-471b-b707-e9aaf67245d2" />    | 
 
