@@ -89,13 +89,7 @@ const PostDetailText = () => {
         }));
     }
 
-    if (loading) {
-        return
-    }
 
-    if (!posts) {
-        return <p>Invalid post data. No post object.</p>;
-    }
 
     return (
         <div>
