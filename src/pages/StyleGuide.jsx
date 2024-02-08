@@ -11,7 +11,7 @@ import Button from "../components/Common/Button";
 import Badge from "../components/Common/Badge";
 import Input from "../components/Form/Input";
 import Select from "../components/Form/Select";
-import { testOption, tel } from "../data/selectOption";
+import { testOption } from "../data/selectOption";
 import Textarea from "../components/Form/Textarea";
 import Checkbox from "../components/Form/Checkbox";
 import PersonInfoList from "../components/PersonInfoList";
@@ -20,10 +20,11 @@ import Radio from "../components/Form/Radio";
 import AddFile from "../components/Form/AddFile";
 import ProfileEdit from "../components/Common/ProfileEdit";
 import InputDate from "../components/Form/InputDate";
-import "./Mypage.scss";
 import bgMypage from "../assets/bg_mypage.png";
 import BoardGallery from "../components/Board/BoardGallery";
 import Pagination from "../components/Common/Pagination";
+import "./Mypage.scss";
+
 
 const StyleGuide = () => {
   const [modal, setModal] = useState(false);

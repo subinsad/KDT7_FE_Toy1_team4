@@ -4,9 +4,31 @@
   display: grid;
   grid-template-columns: 1fr 30rem;
   gap: 3rem;
+  @include tablet {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    > :not(.main__attend) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      .mt10 {
+        margin: 0;
+        .block {
+          height: 100%;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
   @include mobile {
     grid-template-columns: 1fr;
     gap: 1rem;
+    > :not(.main__attend) {
+      display: block;
+      .mt10 {
+        margin-top: 1rem;
+      }
+    }
   }
   > .block {
     margin: 0;
@@ -32,5 +54,23 @@
     .block {
       margin: 0;
     }
+  }
+}
+.main__attend {
+  @include tablet {
+    order: 2;
+  }
+  @include mobile {
+    order: 2;
+  }
+  > .align {
+    margin-bottom: 3rem;
+    .btn {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .board a {
+    pointer-events: none;
   }
 }

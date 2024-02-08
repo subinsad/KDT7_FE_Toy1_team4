@@ -1,7 +1,7 @@
 import React from "react";
 import "./Form.scss";
 
-const AddFile = ({ type, id, text = "", ...props }) => {
+const AddFile = ({ type, id, file, text = "", ...props }) => {
   return (
     <>
       <input type="file" className={"addfile"} id={id} {...props} />

@@ -50,7 +50,6 @@ $Gnb: (
     width: 12rem;
     font-size: 3rem;
     color: $gray;
-    transition: 0.3s;
     text-align: center;
     outline: none;
     @include mobile {
@@ -59,9 +58,7 @@ $Gnb: (
       padding: 1rem 0.5rem;
       box-sizing: border-box;
     }
-    &.--active,
-    &:focus,
-    &:hover {
+    &.--active {
       color: $primary;
       &::after {
         @include position(a, right, 0, top, 0);
