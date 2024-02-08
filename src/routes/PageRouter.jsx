@@ -10,7 +10,7 @@ import Layout from "../layout/Layout";
 import MainContent from "../pages/MainContent";
 import AddPost from "../pages/AddPost";
 import PostDetail from "../pages/PostDetail";
-import ProtectedRoute from "./ProtectedRoute";
+
 import FindPassword from "../pages/FindPassword";
 import AttendanceBoardWrite from "../components/Board/ATtendanceBoardWrite";
 import AttendanceBoardView from "../components/Board/AttendanceBoardView";
@@ -35,11 +35,11 @@ const router = createBrowserRouter([
         element: <Attendance />,
       },
       {
-        path: "attendance/write",
+        path: "/attendance/write",
         element: <AttendanceBoardWrite />,
       },
       {
-        path: "attendance/view",
+        path: "/attendance/view",
         element: <AttendanceBoardView />,
       },
       {
