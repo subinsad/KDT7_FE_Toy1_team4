@@ -116,7 +116,7 @@ const AddPost = ({ username }) => {
 
                         </div>
 
-                        <AddFile id={"file"} file={file} />
+                        <AddFile id={"file"} text={file ? "파일이 추가되었습니다" : "첨부파일"} file={file} />
 
                         <div className="align center">
                             <button type="button" className="btn regular danger" onClick={goTolist} >뒤로가기</button>
