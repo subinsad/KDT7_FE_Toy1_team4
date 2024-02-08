@@ -16,11 +16,15 @@ import AttendanceBoardWrite from "../components/Board/AttendanceBoardWrite";
 import AttendanceBoardView from "../components/Board/AttendanceBoardView";
 import EditMypage from "../pages/EditMypage";
 import PostUpdate from "../components/PostComponents/PostUpdate";
+import ProtectedRoute from './ProtectedRoute';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element:
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>,
     children: [
       {
         path: "main",
