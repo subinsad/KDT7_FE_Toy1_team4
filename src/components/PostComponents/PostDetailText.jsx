@@ -16,7 +16,7 @@ import "./PostDetailText.scss"
 const PostDetailText = () => {
     const { userId, postId } = useParams();
     const [posts, setPosts] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
 
     const navigate = useNavigate();
@@ -37,7 +37,6 @@ const PostDetailText = () => {
             const auth = getAuth();
             const currentUser = auth.currentUser;
             setUser(currentUser);
-            setLoading(true);
 
             try {
                 const postDoc = await getDoc(doc(db, "posts", postId));
