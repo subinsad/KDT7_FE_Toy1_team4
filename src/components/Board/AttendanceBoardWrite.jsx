@@ -9,7 +9,7 @@ import { attendanceOption } from "../../data/selectOption";
 import Textarea from "../Form/Textarea";
 import { useNavigate } from "react-router";
 import { auth, db } from "../../firebase";
-import { addDoc, collection } from "@firebase/firestore";
+import { addDoc, collection, getDoc, doc } from "@firebase/firestore";
 import "./AttendanceBoardWrite.scss";
 
 const AttendanceBoardWrite = () => {
@@ -40,17 +40,11 @@ const AttendanceBoardWrite = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const user = auth.currentUser;
+    const userDocRef = doc(db, "users", user.uid);
+    const userImgDoc = await getDoc(userDocRef);
+    const userImg = userImgDoc.data()?.photoURL;
 
-    if (
-      !user ||
-      isloading ||
-      title === "" ||
-      select === "" ||
-      content === "" ||
-      startdate === "" ||
-      enddate === ""
-    )
-      return;
+    if (!user || isloading || title === "" || select === "" || content === "" || startdate === "" || enddate === "") return;
 
     try {
       setIsloading(true);
@@ -63,6 +57,7 @@ const AttendanceBoardWrite = () => {
         createdAt: Date.now(),
         username: user.displayName,
         userId: user.uid,
+        userImg: userImg,
       });
     } catch (error) {
       console.log("onSubmit Error : ", error);
@@ -82,19 +77,8 @@ const AttendanceBoardWrite = () => {
         <form onSubmit={onSubmit}>
           <div className="attendance-write">
             <Input placeholder="제목을 입력하세요." name="title" onChange={onChange} required />
-            <Select
-              placeholder={"선택하세요"}
-              options={attendanceOption}
-              name="select"
-              onChange={onChange}
-              required
-            />
-            <Textarea
-              rows="10"
-              placeholder="사유를 입력하세요."
-              name="content"
-              onChange={onChange}
-            />
+            <Select placeholder={"선택하세요"} options={attendanceOption} name="select" onChange={onChange} required />
+            <Textarea rows="10" placeholder="사유를 입력하세요." name="content" onChange={onChange} />
             <div className="date-group">
               <InputDate name="startdate" onChange={onChange} required placehodler={"시작일"} />
               ~
@@ -102,11 +86,7 @@ const AttendanceBoardWrite = () => {
             </div>
           </div>
           <div className="btn-group">
-            <Button
-              type="submit"
-              className={"btn primary regular"}
-              text={isloading ? "Loading..." : "신청하기"}
-            />
+            <Button type="submit" className={"btn primary regular"} text={isloading ? "Loading..." : "신청하기"} />
             <Button className={"btn danger regular"} text="취소하기" onClick={backList} />
           </div>
         </form>

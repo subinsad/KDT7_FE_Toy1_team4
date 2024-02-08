@@ -17,7 +17,6 @@ import AttendanceBoardView from "../components/Board/AttendanceBoardView";
 import EditMypage from "../pages/EditMypage";
 import PostUpdate from "../components/PostComponents/PostUpdate";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,7 +56,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/notice/AddPost",
-        element: <AddPost />
+        element: <AddPost />,
       },
       {
         path: "/posts/:postId",
@@ -67,7 +66,6 @@ const router = createBrowserRouter([
         path: "/posts/:postId/PostUpdate",
         element: <PostUpdate />,
       },
-
     ],
   },
   {

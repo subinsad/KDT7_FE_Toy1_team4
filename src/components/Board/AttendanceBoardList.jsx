@@ -10,19 +10,15 @@ const AttendanceBoardList = ({ filterShow }) => {
   const user = auth.currentUser;
   const [attends, setAttends] = useState([]);
   const [isSort, setIsSort] = useState("모두");
+  // const [userImg, setUserImg] = useState([]);
 
   useEffect(() => {
     const fetchAttend = async () => {
-      const attendQuery = query(
-        collection(db, `attendance`),
-        orderBy("createdAt", "desc"),
-        limit(10)
-      );
+      const attendQuery = query(collection(db, `attendance`), orderBy("createdAt", "desc"), limit(10));
 
       const unsubscribe = await onSnapshot(attendQuery, (snapshot) => {
         const attends = snapshot.docs.map((doc) => {
-          const { content, createdAt, startdate, enddate, select, title, userId, username } =
-            doc.data();
+          const { content, createdAt, startdate, enddate, select, title, userId, username, userImg } = doc.data();
           return {
             content,
             createdAt,
@@ -33,6 +29,7 @@ const AttendanceBoardList = ({ filterShow }) => {
             userId,
             username,
             id: doc.id,
+            userImg,
           };
         });
         setAttends(attends);
@@ -40,14 +37,28 @@ const AttendanceBoardList = ({ filterShow }) => {
       return () => unsubscribe();
     };
     fetchAttend();
+    // const fetchImg = async () => {
+    //   const imgQuery = query(collection(db, `users`), limit(10));
+
+    //   const unsubscribe = await onSnapshot(imgQuery, (snapshot) => {
+    //     const images = snapshot.docs.map((doc) => {
+    //       const { photoURL } = doc.data();
+    //       return {
+    //         photoURL,
+    //       };
+    //     });
+    //     setUserImg(images);
+    //   });
+    //   return () => unsubscribe();
+    // };
+    // fetchImg();
   }, []);
 
   const onChange = (e) => {
     const value = e.target.value;
     setIsSort(value);
   };
-  const filteredAttends =
-    isSort === "모두" ? attends : attends.filter((attend) => attend.select === isSort);
+  const filteredAttends = isSort === "모두" ? attends : attends.filter((attend) => attend.select === isSort);
 
   return (
     <>

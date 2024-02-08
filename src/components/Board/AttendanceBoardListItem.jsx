@@ -2,29 +2,20 @@ import React, { useEffect, useRef } from "react";
 import Button from "../Common/Button";
 import Profile from "../Common/Profile";
 import pic1 from "../../assets/profile1.jpg";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AttendanceBoardView from "./AttendanceBoardView";
 import Badge from "../Common/Badge";
 import "./AttendanceBoardListItem.scss";
+import { doc, getDoc } from "firebase/firestore";
 
-const AttendanceBoardListItem = ({
-  content,
-  createdAt,
-  startdate,
-  enddate,
-  select,
-  title,
-  userId,
-  username,
-  id,
-}) => {
+const AttendanceBoardListItem = ({ content, createdAt, startdate, enddate, select, title, userId, username, id, userImg }) => {
   const [isSelect, setIsSelect] = useState("");
   const [isToggle, setIsToggle] = useState(false);
+
   const onInfo = (e) => {
     e.preventDefault();
-
     setIsToggle(!isToggle);
   };
 
@@ -46,7 +37,7 @@ const AttendanceBoardListItem = ({
   return (
     <li>
       <a href="" onClick={onInfo}>
-        <Profile filename={pic1} />
+        <Profile userImg={userImg} />
         <div className="board__status">
           <Badge situation={isSelect} text={select} />
         </div>
