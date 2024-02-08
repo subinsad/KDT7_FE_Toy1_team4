@@ -7,12 +7,17 @@ import StyleGuide from "../pages/StyleGuide";
 import Login from "../pages/Login";
 import Join from "../pages/Join";
 import Layout from "../layout/Layout";
+import MainContent from "../pages/MainContent";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
+      {
+        path: "main",
+        element: <MainContent />,
+      },
       {
         path: "notice",
         element: <Notice />,

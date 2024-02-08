@@ -2,27 +2,30 @@ import React from "react";
 import "./MainContent.scss";
 import Board from "../components/Board/Board";
 import BusinessCard from "../components/BusinessCard";
-import Block from "../components/Common/Block";
-import Heading from "../components/Common/Heading";
-import Button from "../components/Common/Button";
+import TimeBlock from "../components/TimeBlock";
+import PersonInfoList from "../components/PersonInfoList";
+import BoardGallery from "../components/Board/BoardGallery";
 
 const MainContent = () => {
   return (
     <div className="main">
       <div className="main-top">
-        <div>
-          <Board headingTag={"h2"} headingText={"공지사항갤러리"} type={"card"} />
-        </div>
+        <Board type={"list"} headingTag={"h2"} headingText={"근태현황"} />
         <div>
           <BusinessCard />
+          <div className="mt10">
+            <PersonInfoList />
+          </div>
         </div>
       </div>
-      <Block>
-        <div className="align both">
-          <Heading tag={"h3"} size={"small"} text={"제목입니다."} />
-          <Button text="더보기" className={"btn regular primary"} />
-        </div>
-      </Block>
+      <div className="time-wrap">
+        <TimeBlock time={"11:00:20"} title={"현재시각"} icon={"ico1"} />
+        <TimeBlock time={"11:00:20"} title={"근무종료"} icon={"ico2"} />
+        <TimeBlock time={"11:00:20"} title={"근무시각"} icon={"ico3"} />
+        <TimeBlock time={"11:00:20"} title={"현재시각"} icon={"ico4"} />
+      </div>
+
+      <BoardGallery />
     </div>
   );
 };
