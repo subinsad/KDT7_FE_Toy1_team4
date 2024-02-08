@@ -52,6 +52,13 @@
   |   <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/d9a754c4-48d2-4ec6-9695-96a14aa5ce84" />     | <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/d40e3210-3ddc-4425-b5fd-614d6e7d178a)https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/d40e3210-3ddc-4425-b5fd-614d6e7d178a" /> 
  ## ✨세부 기능 설명
 
+ - 로그인
+
+
+| 로그인  |  회원가입  |  비밀번호찾기  |
+| :------------: | :------------: | :------------: |
+|   <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/73f8ab03-eaa3-4dbd-9f67-6bb1ba93a953" />     | <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/dea5a5fc-6fdf-4ee6-9d43-c961f61ab89c" />     | <img width="350" src= "https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/dea5a5fc-6fdf-4ee6-9d43-c961f61ab89c" /> 
+
 
  - 근태페이지
 
