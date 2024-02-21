@@ -4,8 +4,7 @@ import { auth, db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 
 import React from 'react';
-import profileDefault from '../../assets/profile_default.png';
-import Block from '../Common/Block';
+
 import BoardListItem from './BoardListItem';
 
 export default function BoardGallery({ pagination }) {
