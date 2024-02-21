@@ -139,7 +139,7 @@ const PostDetailText = () => {
                                         onClick={goBack}>
                                         뒤로가기
                                     </button>
-                                    {user?.uid === post.userId ? (
+                                    {user?.uid && (
                                         <div className="align right btn-box">
                                             <button
                                                 onClick={() =>
@@ -168,7 +168,7 @@ const PostDetailText = () => {
                                                 수정하기{' '}
                                             </button>
                                         </div>
-                                    ) : null}
+                                    )}
                                 </div>
                             </div>
                         ))}
