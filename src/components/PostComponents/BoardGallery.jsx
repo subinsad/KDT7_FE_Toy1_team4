@@ -1,39 +1,23 @@
 import { useEffect, useState, useMemo } from 'react';
-import {
-    collection,
-    deleteDoc,
-    doc,
-    getDocs,
-    orderBy,
-    query,
-} from 'firebase/firestore';
-import { auth, db, storage } from '../../firebase';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { auth, db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 
-import { deleteObject, ref } from 'firebase/storage';
 import React from 'react';
-
 import profileDefault from '../../assets/profile_default.png';
 import Block from '../Common/Block';
+import BoardListItem from './BoardListItem';
 
 export default function BoardGallery({ pagination }) {
     const user = auth.currentUser;
-    const [dialogStates, setDialogStates] = useState({});
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
-
-    // PostList 페이지에서
-    const handleViewPost = (postId) => {
-        navigate(`/posts/${postId}`, { state: { postId } });
-    };
-
-    //페이지네이션
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
     const itemsPerPage = 4; // 페이지당 항목 수
 
     // slice() 메서드를 사용하여 현재 페이지에 해당하는 항목만 추출.
     // 이를 위해 currentPage와 itemsPerPage를 사용하여 시작 인덱스와 끝 인덱스를 계산
-    //currentPage 값이 변경되는 시점에만 계산, 리렌더링 방지
+    // currentPage 값이 변경되는 시점에만 계산, 리렌더링 방지
     const currentPages = useMemo(() => {
         return posts.slice(
             (currentPage - 1) * itemsPerPage,
@@ -75,24 +59,6 @@ export default function BoardGallery({ pagination }) {
         }
     };
 
-    // 삭제기능
-    const onDelete = async (postId, userId, photo) => {
-        const ok = confirm('삭제하시겠습니까?');
-        if (!ok || user?.uid !== userId) return;
-        try {
-            // postId를 사용하여 deleteDoc 호출
-            await deleteDoc(doc(db, 'posts', postId));
-            if (photo) {
-                const photoRef = ref(storage, `posts/${user.uid}/${postId}`);
-                await deleteObject(photoRef);
-            }
-            // 삭제 후 게시물 목록 갱신
-            fetchPosts();
-        } catch (error) {
-            console.error('게시물 삭제 중 에러:', error);
-        }
-    };
-
     // 세부페이지 경로
     const ViewPost = (postId) => {
         navigate(`/posts/${postId}`);
@@ -107,25 +73,16 @@ export default function BoardGallery({ pagination }) {
             <ul className={'board'}>
                 {currentPages.map((post) => (
                     <li key={post.id}>
-                        <Block>
-                            <a href="" onClick={() => ViewPost(post.id)}>
-                                <img
-                                    src={post.photo || profileDefault}
-                                    alt=""
-                                />
-                                <div className="gallery__info">
-                                    <div className="board__title">
-                                        {post.title}
-                                    </div>
-                                    <div className="board__content">
-                                        {post.textContent}
-                                    </div>
-                                    <div className="board__writer">
-                                        {post.username}
-                                    </div>
-                                </div>
-                            </a>
-                        </Block>
+                        <BoardListItem
+                            post={post}
+                            key={post.id} // BoardListItem 컴포넌트에 key prop을 추가
+                            id={post.id}
+                            img={post.photo}
+                            title={post.title}
+                            username={post.username}
+                            createAt={post.createAt} // createAt props를 전달
+                            ViewPost={ViewPost} // ViewPost 함수를 전달
+                        />
                     </li>
                 ))}
             </ul>
