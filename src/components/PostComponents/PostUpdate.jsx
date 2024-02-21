@@ -8,8 +8,7 @@ import { getAuth } from 'firebase/auth';
 
 import Block from '../Common/Block';
 import Heading from '../Common/Heading';
-import AddFile from '../Form/AddFile';
-import Input from '../PostComponents/Input';
+
 import Textarea from '../Form/Textarea';
 import Text from '../Common/Text';
 import { useLocation } from 'react-router-dom';
