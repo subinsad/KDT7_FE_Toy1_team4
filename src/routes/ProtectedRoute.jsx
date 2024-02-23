@@ -1,16 +1,18 @@
-import { onAuthStateChanged } from "firebase/auth";
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
 
 const ProtectedRoute = ({ children }) => {
-  const navigate = useNavigate();
-  onAuthStateChanged(auth, (user) => {
-    if (user === null) {
-      navigate("/login");
+    const navigate = useNavigate();
+
+    const userId = useSelector((state) => state.user.userInfo.userId);
+
+    if (userId === null) {
+        navigate('/login');
     }
-  });
-  return <>{children}</>;
+
+    return <>{children}</>;
 };
 
 export default ProtectedRoute;
