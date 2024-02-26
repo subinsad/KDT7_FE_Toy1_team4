@@ -9,9 +9,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { FirebaseError } from "firebase/app";
+import { useDispatch } from "react-redux";
+import { fetchUserInfo } from "../store/user.slice";
+import { fetchUserWork } from "../store/work.slice";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,8 +40,9 @@ const Login = () => {
     }
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(auth, email, password);
-
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+      dispatch(fetchUserInfo(user))
+      dispatch(fetchUserWork(user))
       navigate("/main");
     } catch (error) {
       if (error instanceof FirebaseError) {

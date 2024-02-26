@@ -5,7 +5,7 @@ const Input = ({ width, ...props }) => {
   const style = {
     "--width": width,
   };
-  return <input style={style} className="input" {...props} />;
+  return <input style={style} className="input" {...props} required />;
 };
 
 export default Input;

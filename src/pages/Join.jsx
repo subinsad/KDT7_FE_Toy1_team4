@@ -8,9 +8,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
+import { useDispatch } from "react-redux";
+import { fetchUserInfo } from "../store/user.slice";
+import { fetchUserWork } from "../store/work.slice";
 
 const Join = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -37,12 +41,13 @@ const Join = () => {
     }
     try {
       setLoading(true);
-      const createID = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(auth);
-      await updateProfile(createID.user, {
+      const { user } = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(user, {
         displayName: name,
-      });
-
+        photoURL: ""
+      })
+      dispatch(fetchUserInfo(user))
+      dispatch(fetchUserWork(user))
       navigate("/");
     } catch (error) {
       if (error instanceof FirebaseError) {
