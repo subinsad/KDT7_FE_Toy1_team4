@@ -27,7 +27,7 @@ const MainContent = () => {
     return () => clearInterval(intervalId);
   }, [updateCurrentTime]);
 
-  const calWorkingTime = (end, start) => {
+  const calWorkingTime = useCallback((end, start) => {
     const endTime = new Date(`2000-01-01 ${end}`);
     const startTime = new Date(`2000-01-01 ${start}`);
     const differenceInMilliseconds = endTime.getTime() - startTime.getTime();
@@ -36,7 +36,7 @@ const MainContent = () => {
     const formattedHours = hours.toString().padStart(2, "0");
     const formattedMinutes = minutes.toString().padStart(2, "0");
     return `${formattedHours}:${formattedMinutes}`;
-  };
+  },[]);
 
   return (
     <div className="main">
