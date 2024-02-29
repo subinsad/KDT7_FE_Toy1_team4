@@ -5,13 +5,17 @@ import Button from "../components/Common/Button";
 import "./Header.scss";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../store/user.slice";
+import { clearTime } from "../store/work.slice";
 
 const Header = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
   const logout = async () => {
     try {
       await auth.signOut();
-      navigate("/login");
+      dispatch(clearUser())
+      dispatch(clearTime())
     } catch (error) {
       console.log("logout error : ", error);
     }

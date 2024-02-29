@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Profile from "./Common/Profile";
 import Heading from "./Common/Heading";
 import Block from "./Common/Block";
@@ -6,68 +6,17 @@ import "./BusinessCard.scss";
 import Text from "./Common/Text";
 import MyStatus from "./Common/MyStatus";
 import Button from "./Common/Button";
-import { auth, db } from "../firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
 import Dialog from "./Common/Dialog";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { workStart, workEnd } from "../store/work.slice";
 
-const BusinessCard = ({ workStartTime, workEndTime,setWorkStartTime,setWorkEndTime,timeNow }) => {
-
-  const [name, setName] = useState(""); // 사용자 이름 state
-  const [shortInfo, setShortInfo] = useState(""); // 사용자 한줄소개 state
-  const [userImg, setUserImg] = useState(""); // 사용자 유저 이미지 state
-
-  //모달에 관한 state
-  const [modal, setModal] = useState(false);
+const BusinessCard = ({ timeNow }) => {
+  const { startTime, endTime } = useSelector((state) => state.workSlice.working)
+  const { userInfo } = useSelector((state) => state.userSlice)
+  const { name, shortInfo, userImg } = userInfo
+  const dispatch = useDispatch()
   const [alertModal, setAlertModal] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const user = auth.currentUser;
-
-      if (user) {
-        const { displayName, photoURL } = user;
-        setName(displayName || "");
-        setUserImg(photoURL || "");
-
-        const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await getDoc(userDocRef);
-
-        const userShortInfo = userDoc.data()?.shortInfo;
-        setShortInfo(userShortInfo);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const workStart = async () => {
-    const user = auth.currentUser;
-    if (!user) return;
-    const today = new Date();
-    const hours = today.getHours().toString().padStart(2, '0');
-    const minutes = today.getMinutes().toString().padStart(2, '0');
-    const formattedTime = `${hours}:${minutes}`;
-    const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
-    setWorkStartTime(formattedTime);
-    const userDocRef = doc(db, 'workingtimeline', user.uid, user.displayName, formattedDate);
-    await setDoc(userDocRef, {
-      startTime: formattedTime
-    }, { merge: true });
-  }
-
-  const workEnd = async () => {
-    const user = auth.currentUser;
-    if (!user) return;
-    const today = new Date();
-    const hours = today.getHours().toString().padStart(2, '0');
-    const minutes = today.getMinutes().toString().padStart(2, '0');
-    const formattedTime = `${hours}:${minutes}`;
-    const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
-    setWorkEndTime(formattedTime);
-    const userDocRef = doc(db, 'workingtimeline', user.uid, user.displayName, formattedDate);
-    await setDoc(userDocRef, {
-      endTime: formattedTime
-    }, { merge: true });
-  }
 
   return (
     <div className="business-card">
@@ -76,17 +25,17 @@ const BusinessCard = ({ workStartTime, workEndTime,setWorkStartTime,setWorkEndTi
         <Heading tag={"h2"} size={"small"} text={name} />
         {shortInfo ? <Text type={"type1"} text={shortInfo} /> : <Text type={"type1"} text={"-"} />}
 
-        {workStartTime === "" && workEndTime === "" && (
+        {startTime === "" && endTime === "" && (
           <MyStatus timeNow={timeNow} situation={"primary"} text={"근무 전"} />
         )}
-        {workStartTime !== "" && workEndTime === "" && (
+        {startTime !== "" && endTime === "" && (
           <MyStatus timeNow={timeNow} situation={"success"} text={"근무 중"} />
         )}
-        {workStartTime !== "" && workEndTime !== "" && (
+        {startTime !== "" && endTime !== "" && (
           <MyStatus timeNow={timeNow} situation={"danger"} text={"근무 종료"} />
         )}
 
-        {workStartTime === "" && workEndTime === "" && (
+        {startTime === "" && endTime === "" && (
           <>
             <Button className={"btn primary regular"} text="근무시작" onClick={() => { setAlertModal(true); }} />
             <Dialog openModal={alertModal} closeModal={() => setAlertModal(false)} className={"alert"}>
@@ -94,7 +43,7 @@ const BusinessCard = ({ workStartTime, workEndTime,setWorkStartTime,setWorkEndTi
               <div className="align center mt20">
                 <Button className={"btn regular primary"} text="확인"
                   onClick={() => {
-                    workStart()
+                    dispatch(workStart(userInfo))
                     setAlertModal(false);
                   }} />
                 <Button
@@ -110,7 +59,7 @@ const BusinessCard = ({ workStartTime, workEndTime,setWorkStartTime,setWorkEndTi
           </>
         )}
 
-        {workStartTime !== "" && workEndTime === "" && (
+        {startTime !== "" && endTime === "" && (
           <>
             <Button className={"btn danger regular"} text="근무종료" onClick={() => { setAlertModal(true); }} />
             <Dialog openModal={alertModal} closeModal={() => setAlertModal(false)} className={"alert"}>
@@ -118,7 +67,7 @@ const BusinessCard = ({ workStartTime, workEndTime,setWorkStartTime,setWorkEndTi
               <div className="align center mt20">
                 <Button className={"btn regular primary"} text="확인"
                   onClick={() => {
-                    workEnd()
+                    dispatch(workEnd(userInfo))
                     setAlertModal(false);
                   }} />
                 <Button
@@ -133,7 +82,7 @@ const BusinessCard = ({ workStartTime, workEndTime,setWorkStartTime,setWorkEndTi
             </Dialog>
           </>
         )}
-        {workStartTime !== "" && workEndTime !== "" && (
+        {startTime !== "" && endTime !== "" && (
           <>
             <Button className={"btn primary regular"} text="근무시작" disabled />
           </>

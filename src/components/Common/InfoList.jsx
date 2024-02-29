@@ -1,36 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./InfoList.scss";
-import { auth, db } from "../../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
 const InfoList = () => {
-
-  const [userEmail, setUserEmail] = useState("") //사용자 이메일
-  const [userPhone, setUserPhone] = useState("") //사용자 전화번호
-  const [userJob, setUserJob] = useState("") //사용자 직급
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const user = auth.currentUser;
-
-      if (user) {
-        const { email } = user;
-        setUserEmail(email || "");
-
-        const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await getDoc(userDocRef);
-
-        const userPhone = userDoc.data()?.phoneNumber;
-        const userJob = userDoc.data()?.job;
-
-        setUserPhone(userPhone)
-        setUserJob(userJob)
-      }
-    };
-    fetchData();
-  }, []);
-
-
+  const { userPhone,userJob,userEmail } = useSelector((state) => state.userSlice.userInfo)
 
   return (
     <ul className="info-list">

@@ -1,3 +1,10 @@
+export const jobOptions = [
+  { value: "사원", text: "사원" },
+  { value: "대리", text: "대리" },
+  { value: "과장", text: "과장" },
+  { value: "차장", text: "차장" },
+  { value: "부장", text: "부장" },
+];
 export const testOption = [
   {
     value: "010",

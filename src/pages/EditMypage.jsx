@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Block from "../components/Common/Block";
 import Heading from "../components/Common/Heading";
 import Input from "../components/Form/Input";
@@ -6,120 +6,95 @@ import AddFile from "../components/Form/AddFile";
 import Button from "../components/Common/Button";
 import { auth, db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import Dialog from "../components/Common/Dialog";
 import Loading from "../components/Common/Loading";
 import "./EditMypage.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { editUser, editUserBg, editUserImg } from "../store/user.slice";
+import Select from "../components/Form/Select";
+import { jobOptions } from "../data/selectOption";
+import { useCallback } from "react";
 
 const EditMypage = () => {
-  const [name, setName] = useState(""); //사용자 이름
-  const [shortInfo, setShortInfo] = useState(""); //사용자 한줄소개
-  const [userEmail, setUserEmail] = useState(""); //사용자 이메일
-  const [userPhone, setUserPhone] = useState(""); //사용자 전화번호
-  const [userJob, setUserJob] = useState(""); //사용자 직급
-  const [userImgFile, setUserImgFile] = useState(null);
-  const [userBgFile, setUserBgFile] = useState(null);
+  const { userInfo } = useSelector((state) => state.userSlice);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [telError, setTelError] = useState("");
+  const [formData, setFormData] = useState({
+    shortInfo: userInfo.shortInfo || "",
+    userPhone: userInfo.userPhone || "",
+    userJob: userInfo.userJob || "",
+    userImgFile: null,
+    userBgFile: null,
+  });
 
-  //모달에 관한 state`
-  const [modal, setModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
-
   const [isLoading, setIsLoading] = useState(false);
 
-  const user = auth.currentUser;
-  const navigate = useNavigate();
-
   useEffect(() => {
-    const fetchData = async () => {
-      const user = auth.currentUser;
+    if (telError) {
+      const timer = setTimeout(() => {
+        setTelError("");
+      }, 5000);
 
-      if (user) {
-        const { displayName, email } = user;
-        setName(displayName || "");
-        setUserEmail(email || "");
+      return () => clearTimeout(timer);
+    }
+  }, [telError]);
 
-        const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await getDoc(userDocRef);
+  const handleChange = useCallback((e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  },[]);
 
-        const userShortInfo = userDoc.data()?.shortInfo;
-        const userPhone = userDoc.data()?.phoneNumber;
-        const userJob = userDoc.data()?.job;
-
-        setShortInfo(userShortInfo);
-        setUserPhone(userPhone);
-        setUserJob(userJob);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const handleShortInfo = (e) => {
-    const { value } = e.target;
-    setShortInfo(value);
-  };
-  const handlePhone = (e) => {
-    const { value } = e.target;
-    setUserPhone(value);
-  };
-  const handleJob = (e) => {
-    const { value } = e.target;
-    setUserJob(value);
-  };
-  const userImgChange = async (e) => {
+  const handleFileChange = useCallback((field) => (e) => {
     const { files } = e.target;
     if (files && files.length === 1) {
-      setUserImgFile(files[0]);
+      setFormData((prevData) => ({
+        ...prevData,
+        [field]: files[0],
+      }));
     }
-  };
-  const userBgChange = async (e) => {
-    const { files } = e.target;
-    if (files && files.length === 1) {
-      setUserBgFile(files[0]);
-    }
-  };
+  },[]);
 
-  const edit = async (e) => {
+  const edit = useCallback(async (e) => {
     e.preventDefault();
+    const { userPhone, userImgFile, userBgFile, shortInfo, userJob } = formData;
+
+    const phoneRegex = /^010\d{8}$/;
+    if (!phoneRegex.test(userPhone)) {
+      setAlertModal(false);
+      setTelError("010으로 시작하는 11자리 숫자를 입력해주세요");
+      return;
+    }
     setIsLoading(true);
-    const userDocRef = doc(db, "users", user.uid);
+    const userDocRef = doc(db, "users", auth.currentUser.uid);
     try {
-      if (shortInfo) {
-        await setDoc(
-          userDocRef,
-          {
-            shortInfo: shortInfo,
-          },
-          { merge: true }
-        );
-      }
-
-      if (userPhone) {
-        await setDoc(
-          userDocRef,
-          {
-            phoneNumber: userPhone,
-          },
-          { merge: true }
-        );
-      }
-
-      if (userJob) {
-        await setDoc(
-          userDocRef,
-          {
-            job: userJob,
-          },
-          { merge: true }
-        );
-      }
+      await setDoc(
+        userDocRef,
+        {
+          shortInfo: shortInfo,
+          phoneNumber: userPhone,
+          job: userJob,
+        },
+        { merge: true }
+      );
+      dispatch(editUser({
+        shortInfo,
+        userPhone,
+        userJob
+      }));
 
       if (userImgFile) {
-        const locationRef = ref(storage, `UserImage/${user.displayName}`);
+        const locationRef = ref(storage, `UserImage/${auth.currentUser.displayName}`);
         const result = await uploadBytes(locationRef, userImgFile);
         const userImgUrl = await getDownloadURL(result.ref);
-        await updateProfile(user, {
+        await updateProfile(auth.currentUser, {
           photoURL: userImgUrl,
         });
         await setDoc(
@@ -129,10 +104,11 @@ const EditMypage = () => {
           },
           { merge: true }
         );
+        dispatch(editUserImg(userImgUrl));
       }
 
       if (userBgFile) {
-        const locationRef = ref(storage, `UserBg/${user.displayName}`);
+        const locationRef = ref(storage, `UserBg/${auth.currentUser.displayName}`);
         const result = await uploadBytes(locationRef, userBgFile);
         const userBgUrl = await getDownloadURL(result.ref);
         await setDoc(
@@ -142,18 +118,25 @@ const EditMypage = () => {
           },
           { merge: true }
         );
+        dispatch(editUserBg(userBgUrl));
       }
       navigate("/mypage");
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
-  };
+  },[]);
 
-  const checkType = () => {
-    if (!shortInfo || !userPhone || !userJob) {
+  const checkType = useCallback(() => {
+    if (!formData.shortInfo || !formData.userPhone || !formData.userJob) {
       setAlertModal(false);
     }
-  };
+  },[formData]);
+
+  const handleModalClose = useCallback(() => {
+    setAlertModal(false);
+  },[]);
 
   return (
     <>
@@ -167,49 +150,36 @@ const EditMypage = () => {
             <Heading tag={"h2"} size={"small"} text={"회원 정보 수정"} />
 
             <label htmlFor="name">Name</label>
-            <Input width={"100%"} id="name" type="text" disabled value={name || ""} />
+            <Input width={"100%"} id="name" type="text" disabled value={userInfo.name} />
 
             <label htmlFor="email">Email</label>
-            <Input width={"100%"} id="email" type="email" disabled value={userEmail || ""} />
+            <Input width={"100%"} id="email" type="email" disabled value={userInfo.userEmail} />
 
-            <label htmlFor="introduce">한줄소개</label>
-            <Input width={"100%"} id="introduce" type="text" placehodler="한줄소개를 입력해주세요." value={shortInfo || ""} onChange={handleShortInfo} required />
+            <label htmlFor="shortInfo">한줄소개</label>
+            <Input width={"100%"} id="shortInfo" type="text" placeholder="한줄소개를 입력해주세요." value={formData.shortInfo} onChange={handleChange} required />
 
-            <label htmlFor="tel">전화번호</label>
-            <Input width={"100%"} id="tel" type="tel" placeholder="숫자만 입력해주세요." value={userPhone || ""} onChange={handlePhone} required />
+            <label htmlFor="userPhone">전화번호</label>
+            {telError && <Button className={"btn regular danger"} text={telError} type="button" />}
+            <Input width={"100%"} id="userPhone" type="tel" placeholder="숫자만 입력해주세요." value={formData.userPhone} onChange={handleChange} required />
 
-            <label htmlFor="job">직급</label>
-            <Input width={"100%"} id="job" type="text" placeholder="직급을 입력해주세요." value={userJob || ""} onChange={handleJob} required />
+            <label htmlFor="userJob">직급</label>
+            <Select id="userJob" placeholder="직급을 선택해주세요" options={jobOptions} value={formData.userJob} onChange={handleChange} required />
 
             <label htmlFor="">프로필사진</label>
-            <AddFile id={"file2_1"} text={userImgFile ? "파일이 추가되었습니다" : "첨부파일"} onChange={userImgChange} />
+            <AddFile id={"file2_1"} text={formData.userImgFile ? "파일이 추가되었습니다" : "첨부파일"} onChange={handleFileChange("userImgFile")} />
 
             <label htmlFor="">배경사진</label>
-            <AddFile id={"file2_2"} text={userBgFile ? "파일이 추가되었습니다" : "첨부파일"} onChange={userBgChange} />
+            <AddFile id={"file2_2"} text={formData.userBgFile ? "파일이 추가되었습니다" : "첨부파일"} onChange={handleFileChange("userBgFile")} />
 
             <div className="align center">
-              <Button
-                className={"btn regular primary"}
-                text="회원정보수정"
-                type="button"
-                onClick={() => {
-                  setAlertModal(true);
-                }}
-              />
+              <Button className={"btn regular primary"} text="회원정보수정" type="button" onClick={() => setAlertModal(true)} />
             </div>
 
-            <Dialog openModal={alertModal} closeModal={() => setAlertModal(false)} className={"alert"}>
-              <div className="txt-center"> 회원 정보를 수정 하시겠습니까? </div>
+            <Dialog openModal={alertModal} closeModal={handleModalClose} className={"alert"}>
+              <div className="txt-center">회원 정보를 수정 하시겠습니까?</div>
               <div className="align center mt20">
                 <Button className={"btn regular primary"} text="확인" type="submit" onClick={checkType} />
-                <Button
-                  className={"btn regular danger"}
-                  text="취소"
-                  type="button"
-                  onClick={() => {
-                    setAlertModal(false);
-                  }}
-                />
+                <Button className={"btn regular danger"} text="취소" type="button" onClick={handleModalClose} />
               </div>
             </Dialog>
           </Block>
