@@ -49,7 +49,7 @@ const Login = () => {
         setError(error.message);
       }
     } finally {
-      setLoading(false);
+      setLoading(false);;
     };
   };
   return (
