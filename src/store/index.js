@@ -5,11 +5,13 @@ import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from "redux-persist/es/constants";
 import workSlice from "./work.slice";
+import postSlice from "./post.slice";
 
 
 const rootReducer = combineReducers({
     userSlice: userSlice,
-    workSlice: workSlice
+    workSlice: workSlice,
+    postSlice: postSlice
 })
 
 const persistConfig = {

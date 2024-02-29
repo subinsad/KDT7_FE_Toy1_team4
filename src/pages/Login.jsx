@@ -50,7 +50,7 @@ const Login = () => {
       }
     } finally {
       setLoading(false);
-    }
+    };
   };
   return (
     <div className="login__wrapper">
