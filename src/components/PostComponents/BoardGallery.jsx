@@ -4,49 +4,21 @@ import { auth, db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import BoardListItem from './BoardListItem';
 import PageNation from './PageNation';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPosts } from '../../store/post/postSlice';
 
 export default function BoardGallery({ pagination }) {
     const user = auth.currentUser;
     const navigate = useNavigate();
-    const [posts, setPosts] = useState([]);
+
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
     const itemsPerPage = 4; // 페이지당 항목 수
 
+    const dispatch = useDispatch();
+    const { posts } = useSelector((state) => state.postSlice);
+
     useEffect(() => {
-        const fetchPosts = async () => {
-            const postsQuery = query(
-                collection(db, 'posts'),
-                orderBy('createAt', 'desc')
-            );
-
-            try {
-                const snapshot = await getDocs(postsQuery);
-                const newPosts = snapshot.docs.map((doc) => {
-                    const {
-                        title,
-                        textContent,
-                        createAt,
-                        userId,
-                        username,
-                        photo,
-                    } = doc.data();
-                    return {
-                        title,
-                        textContent,
-                        createAt,
-                        userId,
-                        username,
-                        photo,
-                        id: doc.id,
-                    };
-                });
-                setPosts(newPosts);
-            } catch (error) {
-                console.error('게시물 목록 가져오기 중 에러:', error);
-            }
-        };
-
-        fetchPosts();
+        dispatch(fetchPosts());
     }, []);
 
     useEffect(() => {
@@ -69,25 +41,23 @@ export default function BoardGallery({ pagination }) {
     return (
         <div className={'gallery'}>
             <ul className={'board'}>
-                {posts
-                    .slice(
-                        (currentPage - 1) * itemsPerPage,
-                        currentPage * itemsPerPage
-                    )
-                    .map((post) => (
-                        <li key={post.id}>
-                            <BoardListItem
-                                post={post}
-                                key={post.id}
-                                id={post.id}
-                                img={post.photo}
-                                title={post.title}
-                                username={post.username}
-                                createAt={post.createAt}
-                            />
-                        </li>
-                    ))}
+                {/* 비동기로 가져오기 때문에 post가 undefined로 오류발생, 비어있는지 확인 후 slice를 호출 */}
+                {posts && posts.length > 0 ? (
+                    posts
+                        .slice(
+                            (currentPage - 1) * itemsPerPage,
+                            currentPage * itemsPerPage
+                        )
+                        .map((post) => (
+                            <li key={post.id}>
+                                <BoardListItem post={post} />
+                            </li>
+                        ))
+                ) : (
+                    <li>No posts available</li>
+                )}
             </ul>
+
             {pagination && (
                 <PageNation
                     currentPage={currentPage}

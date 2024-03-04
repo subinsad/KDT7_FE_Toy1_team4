@@ -12,39 +12,52 @@ import Input from '../components/Form/Input';
 import Textarea from '../components/Form/Textarea';
 import AddFile from '../components/Form/AddFile';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 import './AddPost.scss';
+import { addPost, addPostImg } from '../store/post/postSlice';
 
 const AddPost = ({ username }) => {
+    const { userInfo } = useSelector((state) => state.userSlice); //userSlice에서 user 정보들을 가져옴
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const goTolist = () => {
         navigate('/notice');
     };
-
     const [isLoading, setLoading] = useState(false);
-    const [title, setTitle] = useState('');
-    const [textContent, setTextContent] = useState('');
-    const [file, setFile] = useState(null);
+    const [postData, setPostData] = useState({
+        //글 작성 하는 모든 인풋 데이터들을 한곳에 받음
+        title: '',
+        textContent: '',
+        file: null,
+    });
 
-    const onChangeTitle = (e) => {
-        setTitle(e.target.value);
-    };
-
-    const onChangeTextContent = (e) => {
-        setTextContent(e.target.value);
+    const handleChange = (e) => {
+        //title,textContent 인풋 타이핑
+        const { id, value } = e.target;
+        setPostData((prevData) => ({
+            ...prevData,
+            [id]: value,
+        }));
     };
 
     const onFileChange = (e) => {
+        //file 등록
         const { files } = e.target;
         if (files && files.length === 1) {
-            setFile(files[0]);
+            setPostData((prevData) => ({
+                ...prevData,
+                file: files[0],
+            }));
         }
     };
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const user = auth.currentUser;
 
-        if (isLoading || title === '' || title.length > 50) return;
+        //postData의 객체로 지정해야함
+        if (isLoading || postData.title === '' || postData.title.length > 50)
+            return;
 
         try {
             const userConfirmed = window.confirm('글을 등록하시겠습니까?');
@@ -54,38 +67,41 @@ const AddPost = ({ username }) => {
             setLoading(true);
 
             const docRef = await addDoc(collection(db, 'posts'), {
-                title,
-                textContent,
+                title: postData.title,
+                textContent: postData.textContent,
                 createAt: new Date().toLocaleString(),
-                username: user.displayName,
-                userId: user.uid,
+                username: userInfo.name,
+                userId: userInfo.userId,
             });
+            //dispatch로 작성한 값을 붙여주는 코드 추가
+            dispatch(
+                addPost({
+                    title: postData.title,
+                    textContent: postData.textContent,
+                    createAt: new Date().toLocaleString(),
+                    username: userInfo.name,
+                    userId: userInfo.userId,
+                })
+            );
 
-            // docRef에 있는 ID를 통해 해당 글의 데이터를 가져옴
-            const newPostId = docRef.id;
-            const newPostData = (
-                await getDoc(doc(db, 'posts', newPostId))
-            ).data();
-
-            console.log('글이 성공적으로 등록되었습니다.', newPostData);
-
-            if (file) {
+            if (postData.file) {
                 const locationRef = ref(
                     storage,
-                    `posts/${user.uid}/${docRef.id}`
+                    `posts/${userInfo.userId}/${docRef.id}`
                 );
-                const result = await uploadBytes(locationRef, file);
+                const result = await uploadBytes(locationRef, postData.file);
                 const url = await getDownloadURL(result.ref);
                 await updateDoc(docRef, {
                     photo: url,
                 });
+                dispatch(
+                    addPostImg({
+                        photoURL: url,
+                        id: docRef.id,
+                    })
+                );
             }
-            goTolist();
-
-            //초기화
-            setTitle('');
-            setFile(null);
-            setTextContent('');
+            navigate('/notice');
         } catch (error) {
             console.error('글 등록 중 오류 발생:', error);
         } finally {
@@ -119,31 +135,33 @@ const AddPost = ({ username }) => {
                                 accept="image/*"
                             />
                         </div>
-
                         <div>
                             <Input
                                 width={'100%'}
                                 placeholder="제목을 작성해주세요."
-                                onChange={onChangeTitle}
+                                id="title"
+                                onChange={handleChange}
                                 required
                             />
                         </div>
-
                         <div>
                             <Textarea
-                                onChange={onChangeTextContent}
+                                onChange={handleChange}
+                                id="textContent"
                                 placeholder="글을 작성해주세요."
                                 width={'100%'}
                                 height={'22rem'}
                             />
                         </div>
-
                         <AddFile
                             id={'file'}
-                            text={file ? '파일이 추가되었습니다' : '첨부파일'}
-                            file={file}
+                            text={
+                                postData.file
+                                    ? '파일이 추가되었습니다'
+                                    : '첨부파일'
+                            }
+                            file={postData.file}
                         />
-
                         <div className="align center">
                             <button
                                 type="button"

@@ -1,56 +1,54 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
-//비동기로 정보를 가져온다.
-// 비동기로 먼저 빈 값 배열을 가져온 후 없다면 있게 만들어주는 로직
-export const fetchUser = createAsyncThunk(
+export const fetchUserInfo = createAsyncThunk(
     'user/fetchUserInfo',
     async (user, thunkAPI) => {
         if (user) {
-            // user 사용자 객체가 있는지 먼저 확인
             try {
                 const userDocRef = doc(db, 'users', user.uid);
-                const userDoc = await getDoc(userDocRef); // 파이어베이스에서 객체 가져옴
+                const userDoc = await getDoc(userDocRef);
 
-                const userShortInfo = userDoc.data()?.shortInfo;
-                const userPhone = userDoc.data()?.phoneNumber;
-                const userJob = userDoc.data()?.job;
-                const userBg = userDoc.data()?.bg;
+                const userData = userDoc.data() || {}; // 데이터가 없을 경우 빈 객체로 초기화
+                const userShortInfo = userData.shortInfo || '';
+                const userPhone = userData.phoneNumber || '';
+                const userJob = userData.job || '';
+                const userBg = userData.bg || '';
 
-                //이건 생성된 user값을 가져와서 사용(기본값)
                 const userName = user.displayName;
-                const userUid = user.uid;
-                const userPhotoURL = user.photoURL;
                 const userEmail = user.email;
+                const userPhotoURL = user.photoURL || '';
+                const userUid = user.uid;
 
-                // 없으면 setDoc으로 생성해줘야함 or 업데이트
-                try {
-                    await setDoc(
-                        userDocRef,
-                        {
-                            name: displayName,
-                            email: email,
-                            phoneNumber: userPhone || '',
-                            photoURL: photoURL,
-                            job: userJob || '',
-                            shortInfo: userShortInfo || '',
-                            bg: userBg || '',
-                        },
-                        { merge: true }
-                    );
-                } catch (error) {
-                    return thunkAPI.rejectWithValue(error.message);
+                if (!userDoc.data()) {
+                    try {
+                        await setDoc(
+                            userDocRef,
+                            {
+                                name: userName,
+                                email: userEmail,
+                                phoneNumber: userPhone || '',
+                                photoURL: userPhotoURL,
+                                job: userJob || '',
+                                shortInfo: userShortInfo || '',
+                                bg: userBg || '',
+                            },
+                            { merge: true }
+                        );
+                    } catch (error) {
+                        console.error(error);
+                    }
                 }
                 return {
-                    userUid,
-                    userName,
-                    shortInfo,
-                    userEmail,
+                    userShortInfo,
                     userPhone,
                     userJob,
-                    userPhotoURL,
                     userBg,
+                    userName,
+                    userEmail,
+                    userPhotoURL,
+                    userUid,
                 };
             } catch (error) {
                 return thunkAPI.rejectWithValue(error.message);
@@ -59,50 +57,87 @@ export const fetchUser = createAsyncThunk(
     }
 );
 
-//초기상태, 작성하는 공간을 생성
 const initialState = {
     userInfo: {
-        user: '박수빈',
-        name: '박수빈이름',
+        userId: '',
+        name: '',
         shortInfo: '',
+        userImg: '',
         userEmail: '',
         userPhone: '',
         userJob: '',
-        userImg: '',
         userBg: '',
     },
+    isLoading: false,
+    error: '',
 };
-
-//실제 리듀서가 동작하는 userSlice를 작성
 
 export const userSlice = createSlice({
     name: 'user',
-    initialState, // 초기상태
-
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(fetchUser.pending, (state) => {
-            state.status = 'loading';
-        });
-        builder.addCase(fetchUser.fulfilled, (state, action) => {
-            state.status = 'success';
+    initialState,
+    reducers: {
+        editUser: (state, action) => {
+            const { userPhone, userJob, shortInfo } = action.payload;
             state.userInfo = {
                 ...state.userInfo,
-                userId: action.payload.userUid,
-                name: action.payload.userName,
-                shortInfo: action.payload.userShortInfo,
-                userImg: action.payload.userPhotoURL,
-                userEmail: action.payload.userEmail,
-                userPhone: action.payload.userPhone,
-                userJob: action.payload.userJob,
-                userBg: action.payload.userBg,
+                userPhone: userPhone,
+                userJob: userJob,
+                shortInfo: shortInfo,
             };
-        });
-        builder.addCase(fetchUser.rejected, (state, action) => {
-            state.status = 'failed';
-            state.error = action.payload;
-        });
+        },
+        editUserImg: (state, action) => {
+            state.userInfo = {
+                ...state.userInfo,
+                userImg: action.payload,
+            };
+        },
+        editUserBg: (state, action) => {
+            state.userInfo = {
+                ...state.userInfo,
+                userBg: action.payload,
+            };
+        },
+        clearUser: (state) => {
+            (state.userInfo = {
+                userId: '',
+                name: '',
+                shortInfo: '',
+                userImg: '',
+                userEmail: '',
+                userPhone: '',
+                userJob: '',
+                userBg: '',
+            }),
+                (state.isLoading = false),
+                (state.error = '');
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchUserInfo.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(fetchUserInfo.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.userInfo = {
+                    ...state.userInfo,
+                    userId: action.payload.userUid,
+                    name: action.payload.userName,
+                    shortInfo: action.payload.userShortInfo,
+                    userImg: action.payload.userPhotoURL,
+                    userEmail: action.payload.userEmail,
+                    userPhone: action.payload.userPhone,
+                    userJob: action.payload.userJob,
+                    userBg: action.payload.userBg,
+                };
+            })
+            .addCase(fetchUserInfo.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            });
     },
 });
 
-export default userSlice.reducer; //리듀서도 export해서 스토어에 리듀서 등록하게 함
+export const { clearUser, editUser, editUserImg, editUserBg } =
+    userSlice.actions;
+export default userSlice.reducer;
