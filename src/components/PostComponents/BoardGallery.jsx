@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import BoardListItem from './BoardListItem';
 import PageNation from './PageNation';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts } from '../../store/post/postSlice';
+import { fetchPosts } from '../../store/post.slice';
 
 export default function BoardGallery({ pagination }) {
     const user = auth.currentUser;

@@ -15,7 +15,7 @@ import AddFile from '../components/Form/AddFile';
 import { useSelector, useDispatch } from 'react-redux';
 
 import './AddPost.scss';
-import { addPost, addPostImg } from '../store/post/postSlice';
+import { addPost, addPostWithImg } from '../store/post.slice';
 
 const AddPost = ({ username }) => {
     const { userInfo } = useSelector((state) => state.userSlice); //userSlice에서 user 정보들을 가져옴
@@ -95,7 +95,7 @@ const AddPost = ({ username }) => {
                     photo: url,
                 });
                 dispatch(
-                    addPostImg({
+                    addPostWithImg({
                         photoURL: url,
                         id: docRef.id,
                     })
