@@ -8,18 +8,71 @@ import Dialog from '../Common/Dialog';
 import bgMypage from '../../assets/bg_mypage.png';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { workEnd, workStart } from '../../store/user/workSlice';
+import { workEnd, workStart } from '../../store/work.slice';
 
-const MypageInfo = () => {
-    const dispatch = useDispatch();
-    const { userInfo } = useSelector((state) => state.userSlice);
-    const { name, shortInfo, userImg, userEmail, userPhone, userJob, userBg } =
-        userInfo;
-    const { startTime, endTime } = useSelector(
-        (state) => state.workSlice.working
-    );
-
+const MypageInfo = ({
+    user,
+    name,
+    shortInfo,
+    userEmail,
+    userPhone,
+    userJob,
+    userImg,
+    workStartTime,
+    workEndTime,
+    userBg,
+    setWorkStartTime,
+    setWorkEndTime,
+}) => {
     const [alertModal, setAlertModal] = useState(false);
+
+    const workStart = async () => {
+        if (!user) return;
+        const today = new Date();
+        const hours = today.getHours().toString().padStart(2, '0');
+        const minutes = today.getMinutes().toString().padStart(2, '0');
+        const formattedTime = `${hours}:${minutes}`;
+        const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
+        setWorkStartTime(formattedTime);
+        const userDocRef = doc(
+            db,
+            'workingtimeline',
+            user.uid,
+            user.displayName,
+            formattedDate
+        );
+        await setDoc(
+            userDocRef,
+            {
+                startTime: formattedTime,
+            },
+            { merge: true }
+        );
+    };
+
+    const workEnd = async () => {
+        if (!user) return;
+        const today = new Date();
+        const hours = today.getHours().toString().padStart(2, '0');
+        const minutes = today.getMinutes().toString().padStart(2, '0');
+        const formattedTime = `${hours}:${minutes}`;
+        const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
+        setWorkEndTime(formattedTime);
+        const userDocRef = doc(
+            db,
+            'workingtimeline',
+            user.uid,
+            user.displayName,
+            formattedDate
+        );
+        await setDoc(
+            userDocRef,
+            {
+                endTime: formattedTime,
+            },
+            { merge: true }
+        );
+    };
 
     return (
         <Block className="mypage__wrapper">
@@ -57,28 +110,36 @@ const MypageInfo = () => {
                         <li aria-hidden="true"></li>
                         <li>
                             <strong>출근시간</strong>
-                            {startTime ? <div>{startTime}</div> : <div>-</div>}
+                            {workStartTime ? (
+                                <div>{workStartTime}</div>
+                            ) : (
+                                <div>-</div>
+                            )}
                         </li>
                         <li>
                             <strong>퇴근시간</strong>
-                            {endTime ? <div>{endTime}</div> : <div>-</div>}
+                            {workEndTime ? (
+                                <div>{workEndTime}</div>
+                            ) : (
+                                <div>-</div>
+                            )}
                         </li>
                         <li>
                             <strong>근태상태</strong>
                             <div>
-                                {startTime === '' && endTime === '' && (
+                                {workStartTime === '' && workEndTime === '' && (
                                     <Badge
                                         situation={'primary'}
                                         text={'근무 전'}
                                     />
                                 )}
-                                {startTime !== '' && endTime === '' && (
+                                {workStartTime !== '' && workEndTime === '' && (
                                     <Badge
                                         situation={'success'}
                                         text={'근무 중'}
                                     />
                                 )}
-                                {startTime !== '' && endTime !== '' && (
+                                {workStartTime !== '' && workEndTime !== '' && (
                                     <Badge
                                         situation={'danger'}
                                         text={'근무 종료'}
@@ -89,7 +150,7 @@ const MypageInfo = () => {
                     </ul>
                 </div>
                 <div className="mypage__status">
-                    {startTime === '' && endTime === '' && (
+                    {workStartTime === '' && workEndTime === '' && (
                         <>
                             <Button
                                 className={'btn primary regular'}
@@ -111,7 +172,7 @@ const MypageInfo = () => {
                                         className={'btn regular primary'}
                                         text="확인"
                                         onClick={() => {
-                                            dispatch(workStart(userInfo));
+                                            workStart();
                                             setAlertModal(false);
                                         }}
                                     />
@@ -128,7 +189,7 @@ const MypageInfo = () => {
                         </>
                     )}
 
-                    {startTime !== '' && endTime === '' && (
+                    {workStartTime !== '' && workEndTime === '' && (
                         <>
                             <Button
                                 className={'btn danger regular'}
@@ -150,7 +211,7 @@ const MypageInfo = () => {
                                         className={'btn regular primary'}
                                         text="확인"
                                         onClick={() => {
-                                            dispatch(workEnd(userInfo));
+                                            workEnd();
                                             setAlertModal(false);
                                         }}
                                     />
@@ -166,7 +227,7 @@ const MypageInfo = () => {
                             </Dialog>
                         </>
                     )}
-                    {startTime !== '' && endTime !== '' && (
+                    {workStartTime !== '' && workEndTime !== '' && (
                         <>
                             <Button
                                 className={'btn primary regular'}

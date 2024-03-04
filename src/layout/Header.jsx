@@ -4,9 +4,9 @@ import Gnb from '../components/Common/Gnb';
 import Button from '../components/Common/Button';
 import './Header.scss';
 import { auth } from '../firebase';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { clearUser } from '../store/user/userSlice';
+import { clearUser } from '../store/user.slice';
+import { clearTime } from '../store/work.slice';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Header = () => {
         try {
             await auth.signOut();
             dispatch(clearUser());
-            // dispatch(clearTime());
+            dispatch(clearTime());
         } catch (error) {
             console.log('logout error : ', error);
         }

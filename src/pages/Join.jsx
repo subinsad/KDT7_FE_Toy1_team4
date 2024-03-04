@@ -9,7 +9,8 @@ import { FirebaseError } from 'firebase/app';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useDispatch } from 'react-redux';
-import { fetchUserInfo } from '../store/user/userSlice';
+import { fetchUserInfo } from '../store/user.slice';
+import { fetchUserWork } from '../store/work.slice';
 
 const Join = () => {
     const navigate = useNavigate();

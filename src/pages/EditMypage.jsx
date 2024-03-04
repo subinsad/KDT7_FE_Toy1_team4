@@ -13,9 +13,10 @@ import Dialog from '../components/Common/Dialog';
 import Loading from '../components/Common/Loading';
 import './EditMypage.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { editUser, editUserBg, editUserImg } from '../store/user/userSlice';
+import { editUser, editUserBg, editUserImg } from '../store/user.slice';
 import Select from '../components/Form/Select';
 import { jobOptions } from '../data/selectOption';
+import { useCallback } from 'react';
 
 const EditMypage = () => {
     const { userInfo } = useSelector((state) => state.userSlice);
@@ -43,25 +44,28 @@ const EditMypage = () => {
         }
     }, [telError]);
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         const { id, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [id]: value,
         }));
-    };
+    }, []);
 
-    const handleFileChange = (field) => (e) => {
-        const { files } = e.target;
-        if (files && files.length === 1) {
-            setFormData((prevData) => ({
-                ...prevData,
-                [field]: files[0],
-            }));
-        }
-    };
+    const handleFileChange = useCallback(
+        (field) => (e) => {
+            const { files } = e.target;
+            if (files && files.length === 1) {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    [field]: files[0],
+                }));
+            }
+        },
+        []
+    );
 
-    const edit = async (e) => {
+    const edit = useCallback(async (e) => {
         e.preventDefault();
         const { userPhone, userImgFile, userBgFile, shortInfo, userJob } =
             formData;
@@ -134,17 +138,17 @@ const EditMypage = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
 
-    const checkType = () => {
+    const checkType = useCallback(() => {
         if (!formData.shortInfo || !formData.userPhone || !formData.userJob) {
             setAlertModal(false);
         }
-    };
+    }, [formData]);
 
-    const handleModalClose = () => {
+    const handleModalClose = useCallback(() => {
         setAlertModal(false);
-    };
+    }, []);
 
     return (
         <>

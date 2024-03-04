@@ -10,8 +10,8 @@ import { signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase';
 import { FirebaseError } from 'firebase/app';
 import { useDispatch } from 'react-redux';
-import { fetchUserInfo } from '../store/user/userSlice';
-import { fetchUserWork } from '../store/user/workSlice';
+import { fetchUserInfo } from '../store/user.slice';
+import { fetchUserWork } from '../store/work.slice';
 
 const Login = () => {
     const navigate = useNavigate();

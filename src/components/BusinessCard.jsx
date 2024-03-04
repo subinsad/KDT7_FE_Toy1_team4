@@ -9,7 +9,7 @@ import Button from './Common/Button';
 import Dialog from './Common/Dialog';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { workStart, workEnd } from '../store/user/workSlice';
+import { workStart, workEnd } from '../store/work.slice';
 
 const BusinessCard = ({ timeNow }) => {
     const { startTime, endTime } = useSelector(
